@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -36,11 +38,25 @@ public class AdminScreen extends BorderPane {
         transactionContainer.setStyle("-fx-background-color: #C4AA97; -fx-border-color: black; -fx-border-width: 0.5; -fx-padding: 20");
         transactionContainer.setMinWidth((WIDTH/3) - 30);
         transactionContainer.setMaxHeight(HEIGHT - 50);
+        transactionContainer.setAlignment(Pos.CENTER);
 
         VBox graphContainer = new VBox(); // This Vbox will primarily be used for the graph information
         graphContainer.setStyle("-fx-background-color: #C4AA97; -fx-border-color: black; -fx-border-width: 0.5; -fx-padding: 20");
         graphContainer.setMinWidth((WIDTH/3) - 30);
         graphContainer.setMaxHeight(HEIGHT - 50);
+        graphContainer.setAlignment(Pos.CENTER);
+
+        // The admin sun image is loaded from the program's resources folder and is placed into the scene
+        InputStream sunLogoStream = getClass().getResourceAsStream("/adminSun.png");
+        Image sun = new Image(sunLogoStream);
+        ImageView displaySun = new ImageView();
+        displaySun.setImage(sun);
+        displaySun.setFitWidth(90);
+        displaySun.setPreserveRatio(true); // sun image is expanded but aspect ratio should be preserved
+        displaySun.setX((WIDTH/2.5) + 7);
+        displaySun.setY(HEIGHT/5);
+
+        graphContainer.getChildren().addAll(displaySun); //add future nodes to the left of the sun
 
         VBox databaseContainer = new VBox(); // This Vbox will primarily be used for the database information
         databaseContainer.setStyle("-fx-background-color: #C4AA97; -fx-border-color: black; -fx-border-width: 0.5; -fx-padding: 20");
@@ -135,7 +151,7 @@ public class AdminScreen extends BorderPane {
     // creation method.
     private void addUserToTextFile(String[] newUser) {
         try {
-            FileOutputStream outS = new FileOutputStream("/userDatabase.txt", true); // true parameter makes it write at the file's end
+            FileOutputStream outS = new FileOutputStream("src/main/resources/userDatabase.txt", true); // true parameter makes it write at the file's end
             OutputStreamWriter writer = new OutputStreamWriter(outS);
             BufferedWriter buffW = new BufferedWriter(writer);
 

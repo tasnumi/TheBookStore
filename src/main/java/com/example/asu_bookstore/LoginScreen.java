@@ -47,7 +47,7 @@ public class LoginScreen extends BorderPane{
         goldBackgroundRight.setFill(Color.web("#ae7219"));
         this.getChildren().add(goldBackgroundRight);
 
-        // The sun image is loaded from the program's src folder and is placed into the scene
+        // The sun image is loaded from the program's resources folder and is placed into the scene
         InputStream sunLogoStream = getClass().getResourceAsStream("/loginSun.png");
         Image sun = new Image(sunLogoStream);
         ImageView displaySun = new ImageView();

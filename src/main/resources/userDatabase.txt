@@ -1,3 +1,6 @@
 1111 abc admin
 resf dsfes buyer
 resffs dsfes seller
+buyer buyer buyer
+b b buyer
+s s seller
