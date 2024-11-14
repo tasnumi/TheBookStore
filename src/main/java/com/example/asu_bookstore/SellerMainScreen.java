@@ -42,21 +42,18 @@ public class SellerMainScreen extends BorderPane{
         Label label1 = new Label("Please select the condition of the book for sale:");
         label1.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
 
+        leftContainer.getChildren().addAll(label1);
 
-        CheckBox checkbox1=new CheckBox("Used");
-        checkbox1.setPadding(new Insets(15,0,0,0));
-        checkbox1.setStyle(" -fx-text-fill: #FFFFFF");
-        CheckBox checkbox2=new CheckBox("Like New");
-        checkbox2.setPadding(new Insets(8,0,0,0));
-        checkbox2.setStyle(" -fx-text-fill: #FFFFFF");
-        CheckBox checkbox3=new CheckBox("Moderately Used");
-        checkbox3.setPadding(new Insets(8,0,0,0));
-        checkbox3.setStyle(" -fx-text-fill: #FFFFFF");
-        CheckBox checkbox4=new CheckBox("Heavily Used");
-        checkbox4.setPadding(new Insets(8,0,0,0));
-        checkbox4.setStyle(" -fx-text-fill: #FFFFFF");
+        String[] checkbox = {"Used", "Like New", "Moderately Used", "Heavily Used"};
+        for(int i=0; i<checkbox.length; i++) {
+            CheckBox ch = new CheckBox(checkbox[i]);
+            ch.setPadding(new Insets(8,0,0,0));
+            ch.setStyle(" -fx-text-fill: #FFFFFF");
+            leftContainer.getChildren().addAll(ch);
+        }
+        
 
-        leftContainer.getChildren().addAll(label1, checkbox1,checkbox2, checkbox3, checkbox4);
+
 
 
         // This VBox contains everything on the right (list of selectable books selected by user)
