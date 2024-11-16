@@ -16,8 +16,8 @@ public class ASU_Bookstore extends Application {
 
     public void start(Stage primaryStage) {
         try {
-            final int WIDTH = 700;  // size of window is not meant to be changed anywhere else in the program
-            final int HEIGHT = 400;
+            final int WIDTH = 800;  // size of window is not meant to be changed anywhere else in the program
+            final int HEIGHT = 500;
             root = new BorderPane();
             admin = new AdminScreen(WIDTH, HEIGHT, this); // an instance of main is sent for screen switching purposes
             buyer = new BuyerMainScreen(WIDTH, HEIGHT, this);
