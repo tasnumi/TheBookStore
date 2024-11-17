@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ComboBox;
 
 import java.io.InputStream;
+import java.util.Objects;
 
 // This com.example.asu_bookstore.SellerMainScreen class will eventually host the seller's screen in the program.
 public class SellerMainScreen extends BorderPane{
@@ -79,8 +80,20 @@ public class SellerMainScreen extends BorderPane{
         text.setPrefWidth(15);
         text.setPrefHeight(15);
 
+        //calculation for the price of the books to be sold
+        //double price=0.00;
+       // if(checkbox1.isSelected() && (Objects.equals(combobox.getValue(), "Natural Science"))) {
+         //   double price = Double.parseDouble(text.getText()) * 0.80;
+      //  } else if (checkbox2.isSelected() &&  (Objects.equals(combobox.getValue(), "Natural Science") ||  (Objects.equals(combobox.getValue(), "Natural Science") ){
+
+        //} else if() {
+
+      //  }else {
+
+       // }
         leftContainer.getChildren().addAll(label1, checkbox1, checkbox2,checkbox3, checkbox4, label2, combobox,label3, text);
 
+        String[] arr = BuyerMainScreen.getBooks();
 
         // This VBox contains everything on the right (list of selectable books selected by user)
         VBox rightContainer = new VBox();
