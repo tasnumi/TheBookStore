@@ -2,9 +2,7 @@ package com.example.asu_bookstore;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -12,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.control.ComboBox;
 
 import java.io.InputStream;
 
@@ -29,35 +28,58 @@ public class SellerMainScreen extends BorderPane{
         entireContainer.setAlignment(Pos.CENTER);
 
         // This VBox contains everything on the left (condition + genre)
-        VBox leftContainer = new VBox();
+        VBox leftContainer = new VBox(20);
         leftContainer.setStyle("-fx-background-color: #be96c4; -fx-border-color: #8273da; -fx-border-width: 0.5; -fx-padding: 20");
         leftContainer.setMinWidth((WIDTH/2.5) - 30);
         leftContainer.setMaxHeight(HEIGHT - 60);
         //leftContainer.setAlignment(Pos.CENTER);
         leftContainer.setPadding(new Insets(0, 15, 0, 0));
 
-        // My recommendation - use CheckBoxes to list the genres and condition. This way the user
+        // My recommendation - use radiobuttons to list the genres and condition. This way the user
         // will be able to view books of multiple genres/conditions at once.
         // delete these comments once completed please!
         Label label1 = new Label("Please select the condition of the book for sale:");
         label1.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
 
 
+        ToggleGroup t = new ToggleGroup();
 
-        CheckBox checkbox1=new CheckBox("Used");
-        checkbox1.setPadding(new Insets(15,0,0,0));
+        RadioButton checkbox1= new RadioButton("Used");
+       // checkbox1.setPadding(new Insets(15,0,0,0));
         checkbox1.setStyle(" -fx-text-fill: #FFFFFF");
-        CheckBox checkbox2=new CheckBox("Like New");
-        checkbox2.setPadding(new Insets(8,0,0,0));
-        checkbox2.setStyle(" -fx-text-fill: #FFFFFF");
-        CheckBox checkbox3=new CheckBox("Moderately Used");
-        checkbox3.setPadding(new Insets(8,0,0,0));
-        checkbox3.setStyle(" -fx-text-fill: #FFFFFF");
-        CheckBox checkbox4=new CheckBox("Heavily Used");
-       checkbox4.setPadding(new Insets(8,0,0,0));
-        checkbox4.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox1.setToggleGroup(t);
 
-        leftContainer.getChildren().addAll(label1, checkbox1, checkbox2,checkbox3, checkbox4);
+        RadioButton checkbox2= new RadioButton("Like New");
+       // checkbox2.setPadding(new Insets(8,0,0,0));
+        checkbox2.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox2.setToggleGroup(t);
+
+        RadioButton checkbox3= new RadioButton("Moderately Used");
+      //  checkbox3.setPadding(new Insets(8,0,0,0));
+        checkbox3.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox3.setToggleGroup(t);
+
+        RadioButton checkbox4= new RadioButton("Heavily Used");
+     //  checkbox4.setPadding(new Insets(8,0,0,0));
+        checkbox4.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox4.setToggleGroup(t);
+
+        Label label2 = new Label("Please select a book genre");
+     //   label2.setPadding(new Insets(20,0,15,0));
+        label2.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+
+        ComboBox<String> combobox = new ComboBox<>();
+        combobox.getItems().addAll("Natural Science", "Computer", "Math", "English", "Language", "Others");
+
+        Label label3 = new Label("Please Enter the Original Book Price:");
+        label3.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+      //  label3.setPadding(new Insets(11,0,11,0));
+
+        TextField text = new TextField();
+        text.setPrefWidth(15);
+        text.setPrefHeight(15);
+
+        leftContainer.getChildren().addAll(label1, checkbox1, checkbox2,checkbox3, checkbox4, label2, combobox,label3, text);
 
 
         // This VBox contains everything on the right (list of selectable books selected by user)
@@ -72,6 +94,7 @@ public class SellerMainScreen extends BorderPane{
         // and not the dropdown list of books from the document (then only one book at a time can be
         // selected. See how the VBox of checkboxes refreshes in the AdminScreen for inspiration.
         // delete these two comments once completed please!
+
 
         // The buyer sun image is loaded from the program's resources folder and is placed into the scene
         InputStream sunLogoStream = getClass().getResourceAsStream("/sellerSun.png");
