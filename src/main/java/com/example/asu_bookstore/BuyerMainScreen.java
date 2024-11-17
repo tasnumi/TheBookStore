@@ -15,10 +15,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,9 +42,6 @@ public class BuyerMainScreen extends BorderPane{
         leftContainer.setAlignment(Pos.CENTER);
         leftContainer.setPadding(new Insets(0, 15, 0, 0));
 
-        // My recommendation - use CheckBoxes to list the genres and condition. This way the user
-        // will be able to view books of multiple genres/conditions at once.
-        // delete these comments once completed please!
         VBox bookConditionsGenre = new VBox(25); //VBox for book conditions
         Label selectCondition = new Label("Please select the condition of the book for purchase");
         Label selectGenre = new Label("Please select a book genre");
@@ -58,15 +52,28 @@ public class BuyerMainScreen extends BorderPane{
         CheckBox moderatelyUsed = new CheckBox("Moderately Used");
         CheckBox heavilyUsed = new CheckBox("Heavily Used");
         bookConditionsGenre.getChildren().addAll(selectCondition, used, likeNew, moderatelyUsed, heavilyUsed, selectGenre, comboBox);
+
+        //sets the style for all the text in the left container to white
         bookConditionsGenre.setStyle("-fx-font-size: 12px;");
+        selectCondition.setStyle("-fx-text-fill: white;");
+        selectGenre.setStyle("-fx-text-fill: white;");
+        comboBox.setStyle("-fx-text-fill: white;");
+        used.setStyle("-fx-text-fill: white;");
+        likeNew.setStyle("-fx-text-fill: white;");
+        moderatelyUsed.setStyle("-fx-text-fill: white;");
+        heavilyUsed.setStyle("-fx-text-fill: white;");
+
         leftContainer.getChildren().add(bookConditionsGenre);
 
+        //Event handler for when the user selects the certain checkboxes and ComboBox for genres.
         used.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         likeNew.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         moderatelyUsed.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         heavilyUsed.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         comboBox.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
 
+        String[] bookList = getBooks();
+        writeToFile(bookList);
         // This VBox contains everything on the right (list of selectable books selected by user)
         VBox rightContainer = new VBox();
         rightContainer.setStyle("-fx-background-color: #83b7b8; -fx-border-color: #1212f8; -fx-border-width: 0.5; -fx-padding: 20");
@@ -98,7 +105,7 @@ public class BuyerMainScreen extends BorderPane{
         // Buyer finalization screen if the user sets up a proper purchase.
         HBox logAndPurchaseButtons = new HBox();
         logAndPurchaseButtons.setSpacing(WIDTH/2);
-        logAndPurchaseButtons.setPadding(new Insets(0, 0, 5, 115));
+        logAndPurchaseButtons.setPadding(new Insets(0, 0, 5, 140));
         Button logOut = new Button("Log Out");
         Button purchase = new Button("Purchase");
         // The behavior for these buttons can be defined here, which might be easier that creating
@@ -185,7 +192,7 @@ public class BuyerMainScreen extends BorderPane{
     }
 
     public static void writeToFile(String[] books)  {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("booksAvailable.txt"))) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/booksAvailable.txt"))) {
             for(int i = 0; i < books.length; i++) {
                 writer.write(books[i]);
                 writer.newLine();
@@ -195,6 +202,7 @@ public class BuyerMainScreen extends BorderPane{
         catch (IOException e){
             System.out.println("Error writing to file.");
         }
+
     }
 
 }
