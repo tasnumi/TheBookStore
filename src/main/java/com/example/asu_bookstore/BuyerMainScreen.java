@@ -118,7 +118,7 @@ public class BuyerMainScreen extends BorderPane{
                     "Title: The Age of Dinosaurs | Author: James Winters | Published Year: 2005 | Condition: Like New | Genre: Natural Science\n",
                     "Title: The Biome Chronicles | Author: Ava Blackwood | Published Year: 2010 | Condition: Used | Genre: Natural Science\n",
                     "Title: The Physics of Natural Disasters | Author: Ethan Prescott | Published Year: 2017 | Condition: Moderately Used | Genre: Natural Science\n",
-                    "Title: The Art of Coding | Author: Olivia Sterling | Published Year: 2012 | Condition: Moderately Heavily Used | Genre: Computer\n",
+                    "Title: The Art of Coding | Author: Olivia Sterling | Published Year: 2012 | Condition: Heavily Used | Genre: Computer\n",
                     "Title: The Secret Life of Databases | Author: Liam Montgomery | Published Year: 2015 | Condition: Like New | Genre: Computer\n",
                     "Title: Mastering C++ | Author: Sophia Devereux | Published Year: 2008 | Condition: Used | Genre: Computer\n",
                     "Title: Understanding Operating Systems | Author: Lucas Carver | Published Year: 2011 | Condition: Moderately Used | Genre: Computer\n",
