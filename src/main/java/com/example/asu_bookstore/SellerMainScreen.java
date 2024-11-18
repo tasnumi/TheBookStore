@@ -84,12 +84,19 @@ public class SellerMainScreen extends BorderPane {
         text.setPrefWidth(15);
         text.setPrefHeight(15);
 
+
+        Label label4 = new Label("Please enter the book title");
+        label4.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+        TextField title = new TextField();
+        title.setPrefWidth(15);
+        title.setPrefHeight(15);
+
         //calculation for the price of the books to be sold
         //double price=0.00;
         VBox printData = new VBox();
 
 
-        leftContainer.getChildren().addAll(label1, checkbox1, checkbox2, checkbox3, checkbox4, label2, combobox, label3, text);
+        leftContainer.getChildren().addAll(label1, checkbox1, checkbox2, checkbox3, checkbox4, label2, combobox, label3, text,label4, title);
 
         String[] arr = BuyerMainScreen.getBooks();
         Button listBook = new Button("List Book");
@@ -156,8 +163,21 @@ public class SellerMainScreen extends BorderPane {
 
     }
     public void HandleOptions(RadioButton checkbox1, RadioButton checkbox2, RadioButton checkbox3, RadioButton checkbox4, TextField text, ComboBox<String> combobox, VBox printData) {
+        printData.getChildren().clear();
+
         String selectedGenre = (String)combobox.getValue();
-        if (checkbox1.isSelected() || checkbox2.isSelected() || checkbox3.isSelected() || checkbox4.isSelected() && !selectedGenre.isEmpty() && !text.getText().isEmpty()) {
+
+       // if (checkbox1.isSelected() || checkbox2.isSelected() || checkbox3.isSelected() || checkbox4.isSelected() && !selectedGenre.isEmpty() && !text.getText().isEmpty()) {
+            if (selectedGenre == null || selectedGenre.isEmpty()) {
+                Label error = new Label("Please enter a genre");
+                printData.getChildren().add(error);
+                return;
+            }
+            if(text.getText() == null || text.getText().isEmpty()) {
+                Label error = new Label("Please input a price");
+                printData.getChildren().add(error);
+                return;
+            }
             try {
                 int inputVal = Integer.parseInt(text.getText());
                 if (checkbox1.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) && inputVal > 0) {
@@ -184,7 +204,7 @@ public class SellerMainScreen extends BorderPane {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
+
     }
 
 
