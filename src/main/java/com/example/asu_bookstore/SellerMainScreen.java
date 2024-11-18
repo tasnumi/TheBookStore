@@ -82,13 +82,8 @@ public class SellerMainScreen extends BorderPane{
 
         //calculation for the price of the books to be sold
         //double price=0.00;
-       // if(checkbox1.isSelected() && (Objects.equals(combobox.getValue(), "Natural Science"))) {
-         //   double price = Double.parseDouble(text.getText()) * 0.80;
-      //  } else if (checkbox2.isSelected() &&  (Objects.equals(combobox.getValue(), "Natural Science") ||  (Objects.equals(combobox.getValue(), "Natural Science") ){
+       // if(checkbox1.isSelected() && combobox.getValue())
 
-        //} else if() {
-
-      //  }else {
 
        // }
         leftContainer.getChildren().addAll(label1, checkbox1, checkbox2,checkbox3, checkbox4, label2, combobox,label3, text);
