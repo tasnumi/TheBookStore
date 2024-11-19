@@ -174,4 +174,8 @@ public class BuyerMainScreen extends BorderPane{
 
     }
 
+    public ArrayList<String> getBookData() {
+        return addBooksToFile;
+    }
+
 }
