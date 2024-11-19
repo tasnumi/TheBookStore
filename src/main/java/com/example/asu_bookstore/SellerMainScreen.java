@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ComboBox;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Objects;
 
 // This com.example.asu_bookstore.SellerMainScreen class will eventually host the seller's screen in the program.
@@ -98,7 +99,7 @@ public class SellerMainScreen extends BorderPane {
 
         leftContainer.getChildren().addAll(label1, checkbox1, checkbox2, checkbox3, checkbox4, label2, combobox, label3, text,label4, title);
 
-        String[] arr = BuyerMainScreen.getBooks();
+        ArrayList<String> arr = BuyerMainScreen.getBooks();
         Button listBook = new Button("List Book");
         // This VBox contains everything on the right (list of selectable books selected by user)
         VBox rightContainer = new VBox();

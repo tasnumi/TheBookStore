@@ -21,12 +21,17 @@ import java.util.Arrays;
 
 // This com.example.asu_bookstore.BuyerMainScreen class will eventually host the buyer's screen in the program.
 public class BuyerMainScreen extends BorderPane{
-    VBox filteredItems = new VBox();
+    private ArrayList<String> addBooksToFile = new ArrayList<String>();
+    VBox filteredItems = new VBox(15);
 
     public BuyerMainScreen(final int WIDTH, final int HEIGHT, ASU_Bookstore control) {
         Rectangle turquoiseBackground = new Rectangle(WIDTH, WIDTH); // apricot background
         turquoiseBackground.setFill(Color.web("#CDE8E5"));
         this.getChildren().add(turquoiseBackground);
+
+        ArrayList<String> bookList = getBooks();
+        writeToFile(bookList);
+        getDataFromTextDB();
 
         // This HBox contains everything that will be placed inside the main buyer screen
         HBox entireContainer = new HBox();
@@ -46,7 +51,7 @@ public class BuyerMainScreen extends BorderPane{
         Label selectCondition = new Label("Please select the condition of the book for purchase");
         Label selectGenre = new Label("Please select a book genre");
         ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.getItems().addAll("Natural Science", "Computer", "Math", "English", "Language", "Others");
+        comboBox.getItems().addAll("Natural Science", "Computer", "Math", "English", "Language", "Other");
         CheckBox used = new CheckBox("Used");
         CheckBox likeNew = new CheckBox("Like New");
         CheckBox moderatelyUsed = new CheckBox("Moderately Used");
@@ -72,8 +77,7 @@ public class BuyerMainScreen extends BorderPane{
         heavilyUsed.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         comboBox.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
 
-        String[] bookList = getBooks();
-        writeToFile(bookList);
+
         // This VBox contains everything on the right (list of selectable books selected by user)
         VBox rightContainer = new VBox();
         rightContainer.setStyle("-fx-background-color: #83b7b8; -fx-border-color: #1212f8; -fx-border-width: 0.5; -fx-padding: 20");
@@ -119,8 +123,8 @@ public class BuyerMainScreen extends BorderPane{
         this.setBottom(logAndPurchaseButtons);
 
     }
-        public static String[] getBooks() {
-            String [] booksAvailable = {
+        public static ArrayList<String> getBooks() {
+            ArrayList<String> booksAvailable = new ArrayList<>(Arrays.asList(
                     "Title: The Secret Lives of Plants | Author: Emily Hawthorne | Published Year: 1999 | Condition: Heavily Used | Genre: Natural Science\n",
                     "Title: The Age of Dinosaurs | Author: James Winters | Published Year: 2005 | Condition: Like New | Genre: Natural Science\n",
                     "Title: The Biome Chronicles | Author: Ava Blackwood | Published Year: 2010 | Condition: Used | Genre: Natural Science\n",
@@ -145,25 +149,22 @@ public class BuyerMainScreen extends BorderPane{
                     "Title: Wandering Souls | Author: Clara Winthrop | Published Year: 1989 | Condition: Like New | Genre: Other\n",
                     "Title: The Eternal Puzzle | Author: Marcus Fields | Published Year: 2017 | Condition: Used | Genre: Other\n",
                     "Title: Whispers from the Void | Author: Evelyn Waters | Published Year: 2006 | Condition: Moderately Used | Genre: Other\n"
-
-
-            };
+            ));
             return booksAvailable;
         }
 
     public void handleSelection(CheckBox used, CheckBox likeNew, CheckBox moderatelyUsed, CheckBox heavilyUsed, ComboBox<String> genres, VBox filteredItems) {
         filteredItems.getChildren().clear();
         ArrayList<String> filteredBooks = new ArrayList<>();
-        String[] books = getBooks();
+        ArrayList<String> books = getBooks();
         String selectedGenre = (String) genres.getValue();
-        System.out.println(Arrays.toString(books));
 
         if(selectedGenre == null || selectedGenre.isEmpty()) {
             filteredItems.getChildren().add(new Label("Please select a genre."));
             return;
         }
-            for(int i = 0; i < books.length; i++) {
-                String book = books[i];
+            for(int i = 0; i < books.size(); i++) {
+                String book = books.get(i);
                 boolean matches = false;
                 if(used.isSelected() && book.contains("Condition: Used")) {
                     matches = true;
@@ -191,16 +192,35 @@ public class BuyerMainScreen extends BorderPane{
         }
     }
 
-    public static void writeToFile(String[] books)  {
+    public static void writeToFile(ArrayList<String> books)  {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/booksAvailable.txt"))) {
-            for(int i = 0; i < books.length; i++) {
-                writer.write(books[i]);
+            for(int i = 0; i < books.size(); i++) {
+                writer.write(books.get(i));
                 writer.newLine();
             }
             System.out.println("Books written to file successfully");
         }
         catch (IOException e){
             System.out.println("Error writing to file.");
+        }
+
+    }
+
+    private void getDataFromTextDB() {
+        String currLine = "";
+        try {
+            InputStream is = getClass().getResourceAsStream("/booksAvailable.txt");
+            InputStreamReader reader = new InputStreamReader(is);
+            BufferedReader buffer = new BufferedReader(reader);
+
+            while((currLine = buffer.readLine()) != null) {
+                addBooksToFile.add(currLine);
+                System.out.println(currLine);
+            }
+            buffer.close();
+            reader.close();
+        } catch (Exception e) {
+            System.out.println("Error reading in the database");
         }
 
     }
