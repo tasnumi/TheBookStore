@@ -99,7 +99,6 @@ public class SellerMainScreen extends BorderPane {
 
         leftContainer.getChildren().addAll(label1, checkbox1, checkbox2, checkbox3, checkbox4, label2, combobox, label3, text,label4, title);
 
-        ArrayList<String> arr = BuyerMainScreen.getBooks();
         Button listBook = new Button("List Book");
         // This VBox contains everything on the right (list of selectable books selected by user)
         VBox rightContainer = new VBox();

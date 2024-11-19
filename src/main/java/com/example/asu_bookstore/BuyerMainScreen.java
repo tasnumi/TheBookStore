@@ -29,8 +29,6 @@ public class BuyerMainScreen extends BorderPane{
         turquoiseBackground.setFill(Color.web("#CDE8E5"));
         this.getChildren().add(turquoiseBackground);
 
-        ArrayList<String> bookList = getBooks();
-        writeToFile(bookList);
         getDataFromTextDB();
 
         // This HBox contains everything that will be placed inside the main buyer screen
@@ -86,10 +84,6 @@ public class BuyerMainScreen extends BorderPane{
         rightContainer.setAlignment(Pos.CENTER);
         rightContainer.setPadding(new Insets(0, 0, 0, 15));
 
-        // my recommendation - place a VBox into a ScrollPane to display the list of book checkboxes
-        // and not the dropdown list of books from the document (then only one book at a time can be
-        // selected. See how the VBox of checkboxes refreshes in the AdminScreen for inspiration.
-        // delete these comments once completed please!
         ScrollPane rightPane = new ScrollPane();
         rightPane.setContent(filteredItems);
         rightContainer.getChildren().add(rightPane);
@@ -123,48 +117,18 @@ public class BuyerMainScreen extends BorderPane{
         this.setBottom(logAndPurchaseButtons);
 
     }
-        public static ArrayList<String> getBooks() {
-            ArrayList<String> booksAvailable = new ArrayList<>(Arrays.asList(
-                    "Title: The Secret Lives of Plants | Author: Emily Hawthorne | Published Year: 1999 | Condition: Heavily Used | Genre: Natural Science\n",
-                    "Title: The Age of Dinosaurs | Author: James Winters | Published Year: 2005 | Condition: Like New | Genre: Natural Science\n",
-                    "Title: The Biome Chronicles | Author: Ava Blackwood | Published Year: 2010 | Condition: Used | Genre: Natural Science\n",
-                    "Title: The Physics of Natural Disasters | Author: Ethan Prescott | Published Year: 2017 | Condition: Moderately Used | Genre: Natural Science\n",
-                    "Title: The Art of Coding | Author: Olivia Sterling | Published Year: 2012 | Condition: Heavily Used | Genre: Computer\n",
-                    "Title: The Secret Life of Databases | Author: Liam Montgomery | Published Year: 2015 | Condition: Like New | Genre: Computer\n",
-                    "Title: Mastering C++ | Author: Sophia Devereux | Published Year: 2008 | Condition: Used | Genre: Computer\n",
-                    "Title: Understanding Operating Systems | Author: Lucas Carver | Published Year: 2011 | Condition: Moderately Used | Genre: Computer\n",
-                    "Title: The Geometry of Nature | Author: Isabella Greyson | Published Year: 2013 | Condition: Heavily Used | Genre: Math\n",
-                    "Title: The Physics of Natural Disasters | Author: Mason Wright | Published Year: 2016 | Condition: Like New | Genre: Math\n",
-                    "Title: The Art of Proof | Author: Amelia Stone | Published Year: 2007 | Condition: Used | Genre: Math\n",
-                    "Title: The Calculus of Variations | Author: Noah Bennett | Published Year: 2019 | Condition: Moderately Used | Genre: Math\n",
-                    "Title: Whispers in the Wind | Author: Chloe Rivers | Published Year: 2003 | Condition: Heavily Used | Genre: English\n",
-                    "Title: Echoes of the Past | Author: Benjamin Cross | Published Year: 2011 | Condition: Like New | Genre: English\n",
-                    "Title: The Last Letter | Author: Grace Montgomery | Published Year: 2007 | Condition: Used | Genre: English\n",
-                    "Title: A Symphony of Words | Author: Victoria Lancaster | Published Year: 2014 | Condition: Moderately Used | Genre: English\n",
-                    "Title: The Art of Linguistic Expression | Author: Samuel Rothschild | Published Year: 2010 | Condition: Heavily Used | Genre: Language\n",
-                    "Title: Words in Motion | Author: Charlotte Mitchell | Published Year: 1989 | Condition: Like New | Genre: Language\n",
-                    "Title: Breaking Down Grammar | Author: Oliver Donovan | Published Year: 2017 | Condition: Used | Genre: Language\n",
-                    "Title: A World of Words | Author: Harrison Langley | Published Year: 2006 | Condition: Moderately Used | Genre: Language\n",
-                    "Title: Into the Unknown | Author: Samuel Rothschild | Published Year: 2010 | Condition: Heavily Used | Genre: Other\n",
-                    "Title: Wandering Souls | Author: Clara Winthrop | Published Year: 1989 | Condition: Like New | Genre: Other\n",
-                    "Title: The Eternal Puzzle | Author: Marcus Fields | Published Year: 2017 | Condition: Used | Genre: Other\n",
-                    "Title: Whispers from the Void | Author: Evelyn Waters | Published Year: 2006 | Condition: Moderately Used | Genre: Other\n"
-            ));
-            return booksAvailable;
-        }
 
     public void handleSelection(CheckBox used, CheckBox likeNew, CheckBox moderatelyUsed, CheckBox heavilyUsed, ComboBox<String> genres, VBox filteredItems) {
         filteredItems.getChildren().clear();
         ArrayList<String> filteredBooks = new ArrayList<>();
-        ArrayList<String> books = getBooks();
         String selectedGenre = (String) genres.getValue();
 
         if(selectedGenre == null || selectedGenre.isEmpty()) {
             filteredItems.getChildren().add(new Label("Please select a genre."));
             return;
         }
-            for(int i = 0; i < books.size(); i++) {
-                String book = books.get(i);
+            for(int i = 0; i < addBooksToFile.size(); i++) {
+                String book = addBooksToFile.get(i);
                 boolean matches = false;
                 if(used.isSelected() && book.contains("Condition: Used")) {
                     matches = true;
@@ -192,20 +156,6 @@ public class BuyerMainScreen extends BorderPane{
         }
     }
 
-    public static void writeToFile(ArrayList<String> books)  {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/booksAvailable.txt"))) {
-            for(int i = 0; i < books.size(); i++) {
-                writer.write(books.get(i));
-                writer.newLine();
-            }
-            System.out.println("Books written to file successfully");
-        }
-        catch (IOException e){
-            System.out.println("Error writing to file.");
-        }
-
-    }
-
     private void getDataFromTextDB() {
         String currLine = "";
         try {
@@ -215,7 +165,6 @@ public class BuyerMainScreen extends BorderPane{
 
             while((currLine = buffer.readLine()) != null) {
                 addBooksToFile.add(currLine);
-                System.out.println(currLine);
             }
             buffer.close();
             reader.close();
