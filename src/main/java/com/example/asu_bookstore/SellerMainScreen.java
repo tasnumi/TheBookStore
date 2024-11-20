@@ -19,7 +19,24 @@ import java.util.Objects;
 
 // This com.example.asu_bookstore.SellerMainScreen class will eventually host the seller's screen in the program.
 public class SellerMainScreen extends BorderPane {
+    ScrollPane r = new ScrollPane();
     public SellerMainScreen(final int WIDTH, final int HEIGHT, ASU_Bookstore control) {
+        ASU_Bookstore bookstore = new ASU_Bookstore();
+        BuyerMainScreen buyer = new BuyerMainScreen(WIDTH, HEIGHT, bookstore);
+        ArrayList<String> bookDatabase = buyer.getBookData();
+        //System.out.println(bookDatabase);
+        VBox vbox = new VBox();
+
+        for(int i=0; i<bookDatabase.size(); i++) {
+            Label book = new Label(bookDatabase.get(i));
+            vbox.getChildren().add(book);
+           // System.out.println();
+        }
+        r.setContent(vbox);
+       // System.out.println(bookDatabase);
+      //  r.setContent(bookDatabase);
+
+
         Rectangle lightPurpBackground = new Rectangle(WIDTH, WIDTH); // apricot background
         lightPurpBackground.setFill(Color.web("#E4CDE8"));
         this.getChildren().add(lightPurpBackground);
@@ -114,6 +131,7 @@ public class SellerMainScreen extends BorderPane {
         checkbox3.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
         checkbox4.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
         combobox.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
+        //text.setOnMouseClicked();
        // text.textProperty().addListener((observable, oldValue, newValue) -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
 
         listBook.setOnAction(e -> {
@@ -122,7 +140,7 @@ public class SellerMainScreen extends BorderPane {
         });
 
 
-        rightContainer.getChildren().addAll(listBook, printData);
+        rightContainer.getChildren().addAll(listBook, printData,r);
 
         // my recommendation - place a VBox into a ScrollPane to display the list of book checkboxes
         // and not the dropdown list of books from the document (then only one book at a time can be
@@ -165,6 +183,7 @@ public class SellerMainScreen extends BorderPane {
     public void HandleOptions(RadioButton checkbox1, RadioButton checkbox2, RadioButton checkbox3, RadioButton checkbox4, TextField text, ComboBox<String> combobox, VBox printData) {
         printData.getChildren().clear();
 
+
         String selectedGenre = (String)combobox.getValue();
 
        // if (checkbox1.isSelected() || checkbox2.isSelected() || checkbox3.isSelected() || checkbox4.isSelected() && !selectedGenre.isEmpty() && !text.getText().isEmpty()) {
@@ -184,21 +203,25 @@ public class SellerMainScreen extends BorderPane {
                    double price=inputVal*0.70;
                     String p = String.format("This is your price $%.2f", price);
                     Label label = new Label(p);
+                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
                     printData.getChildren().add(label);
                 } else if(checkbox2.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) && inputVal > 0) {
                     double price=inputVal*0.90;
                     String p = String.format("This is your price $%.2f", price);
                     Label label = new Label(p);
+                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
                     printData.getChildren().add(label);
                 } else if(checkbox3.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) & inputVal > 0) {
                     double price=inputVal*0.85;
                     String p = String.format("This is your price $%.2f", price);
                     Label label = new Label(p);
+                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
                     printData.getChildren().add(label);
                 } else if(checkbox4.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) & inputVal > 0) {
                     double price=inputVal*0.50;
                     String p = String.format("This is your price $%.2f", price);
                     Label label = new Label(p);
+                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
                     printData.getChildren().add(label);
                 }
             } catch (Exception e) {
