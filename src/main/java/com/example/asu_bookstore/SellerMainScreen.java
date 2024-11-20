@@ -109,6 +109,8 @@ public class SellerMainScreen extends BorderPane {
         title.setPrefWidth(15);
         title.setPrefHeight(15);
 
+
+
         //calculation for the price of the books to be sold
         //double price=0.00;
         VBox printData = new VBox();
@@ -126,16 +128,16 @@ public class SellerMainScreen extends BorderPane {
         rightContainer.setPadding(new Insets(0, 0, 0, 15));
 
         //HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData);
-        checkbox1.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
-        checkbox2.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
-        checkbox3.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
-        checkbox4.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
-        combobox.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
+        checkbox1.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData, title, bookDatabase));
+        checkbox2.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData,title, bookDatabase));
+        checkbox3.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData,title, bookDatabase));
+        checkbox4.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData,title, bookDatabase));
+        combobox.setOnAction(e -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData,title, bookDatabase));
         //text.setOnMouseClicked();
        // text.textProperty().addListener((observable, oldValue, newValue) -> HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData));
 
         listBook.setOnAction(e -> {
-            HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData);
+            HandleOptions(checkbox1, checkbox2, checkbox3, checkbox4, text, combobox, printData,title, bookDatabase);
 
         });
 
@@ -180,7 +182,7 @@ public class SellerMainScreen extends BorderPane {
 
 
     }
-    public void HandleOptions(RadioButton checkbox1, RadioButton checkbox2, RadioButton checkbox3, RadioButton checkbox4, TextField text, ComboBox<String> combobox, VBox printData) {
+    public void HandleOptions(RadioButton checkbox1, RadioButton checkbox2, RadioButton checkbox3, RadioButton checkbox4, TextField text, ComboBox<String> combobox, VBox printData, TextField title,  ArrayList<String> bookDatabase) {
         printData.getChildren().clear();
 
 
@@ -197,8 +199,18 @@ public class SellerMainScreen extends BorderPane {
                 printData.getChildren().add(error);
                 return;
             }
+        for(int i=0; i<bookDatabase.size(); i++) {
+            if(!Objects.equals(title.getText(), bookDatabase.get(i))) {
+                Label error = new Label("Please enter a correct title");
+                printData.getChildren().add(error);
+                return;
+            }
+            // System.out.println();
+        }
+
             try {
-                int inputVal = Integer.parseInt(text.getText());
+
+                    int inputVal = Integer.parseInt(text.getText());
                 if (checkbox1.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) && inputVal > 0) {
                    double price=inputVal*0.70;
                     String p = String.format("This is your price $%.2f", price);
