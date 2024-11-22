@@ -2,26 +2,23 @@ package com.example.asu_bookstore;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 // This com.example.asu_bookstore.BuyerMainScreen class will eventually host the buyer's screen in the program.
-public class BuyerMainScreen extends BorderPane{
-    private ArrayList<String> addBooksToFile = new ArrayList<String>();
+public class BuyerMainScreen extends BorderPane {
+    private ArrayList<String> addBooksToFile = new ArrayList<>();
     VBox filteredItems = new VBox(15);
 
     public BuyerMainScreen(final int WIDTH, final int HEIGHT, ASU_Bookstore control) {
@@ -40,12 +37,12 @@ public class BuyerMainScreen extends BorderPane{
         // This VBox contains everything on the left (condition + genre)
         VBox leftContainer = new VBox();
         leftContainer.setStyle("-fx-background-color: #83b7b8; -fx-border-color: #1212f8; -fx-border-width: 0.5; -fx-padding: 20");
-        leftContainer.setMinWidth((WIDTH/2.5) - 30);
+        leftContainer.setMinWidth((WIDTH / 2.5) - 30);
         leftContainer.setMaxHeight(HEIGHT - 60);
         leftContainer.setAlignment(Pos.CENTER);
         leftContainer.setPadding(new Insets(0, 15, 0, 0));
 
-        VBox bookConditionsGenre = new VBox(25); //VBox for book conditions
+        VBox bookConditionsGenre = new VBox(25); // VBox for book conditions
         Label selectCondition = new Label("Please select the condition of the book for purchase");
         Label selectGenre = new Label("Please select a book genre");
         ComboBox<String> comboBox = new ComboBox<>();
@@ -56,7 +53,7 @@ public class BuyerMainScreen extends BorderPane{
         CheckBox heavilyUsed = new CheckBox("Heavily Used");
         bookConditionsGenre.getChildren().addAll(selectCondition, used, likeNew, moderatelyUsed, heavilyUsed, selectGenre, comboBox);
 
-        //sets the style for all the text in the left container to white
+        // Set the style for all the text in the left container to white
         bookConditionsGenre.setStyle("-fx-font-size: 12px;");
         selectCondition.setStyle("-fx-text-fill: white;");
         selectGenre.setStyle("-fx-text-fill: white;");
@@ -68,18 +65,17 @@ public class BuyerMainScreen extends BorderPane{
 
         leftContainer.getChildren().add(bookConditionsGenre);
 
-        //Event handler for when the user selects the certain checkboxes and ComboBox for genres.
+        // Event handler for when the user selects the certain checkboxes and ComboBox for genres
         used.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         likeNew.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         moderatelyUsed.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         heavilyUsed.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
         comboBox.setOnAction(e -> handleSelection(used, likeNew, moderatelyUsed, heavilyUsed, comboBox, filteredItems));
 
-
         // This VBox contains everything on the right (list of selectable books selected by user)
         VBox rightContainer = new VBox();
         rightContainer.setStyle("-fx-background-color: #83b7b8; -fx-border-color: #1212f8; -fx-border-width: 0.5; -fx-padding: 20");
-        rightContainer.setMinWidth((WIDTH/2.5) - 30);
+        rightContainer.setMinWidth((WIDTH / 2.5) - 30);
         rightContainer.setMaxHeight(HEIGHT - 60);
         rightContainer.setAlignment(Pos.CENTER);
         rightContainer.setPadding(new Insets(0, 0, 0, 15));
@@ -88,71 +84,65 @@ public class BuyerMainScreen extends BorderPane{
         rightPane.setContent(filteredItems);
         rightContainer.getChildren().add(rightPane);
 
-
         // The buyer sun image is loaded from the program's resources folder and is placed into the scene
         InputStream sunLogoStream = getClass().getResourceAsStream("/buyerSun.png");
         Image sun = new Image(sunLogoStream);
         ImageView displaySun = new ImageView();
         displaySun.setImage(sun);
         displaySun.setFitWidth(125);
-        displaySun.setPreserveRatio(true); // sun image is expanded but aspect ratio should be preserved
-        displaySun.setX((WIDTH/2.5) + 7);
-        displaySun.setY(HEIGHT/5);
+        displaySun.setPreserveRatio(true); // Sun image is expanded but aspect ratio should be preserved
+        displaySun.setX((WIDTH / 2.5) + 7);
+        displaySun.setY(HEIGHT / 5);
 
-        // These buttons allow the user to move though the program: Back to the login screen and onto the
-        // Buyer finalization screen if the user sets up a proper purchase.
+        // These buttons allow the user to move through the program
         HBox logAndPurchaseButtons = new HBox();
-        logAndPurchaseButtons.setSpacing(WIDTH/2);
+        logAndPurchaseButtons.setSpacing(WIDTH / 2);
         logAndPurchaseButtons.setPadding(new Insets(0, 0, 5, 140));
         Button logOut = new Button("Log Out");
 
         logOut.setOnAction(e -> control.switchScreen(""));
 
         Button purchase = new Button("Purchase");
-        // The behavior for these buttons can be defined here, which might be easier that creating
-        // a separate ButtonHandler<ActionEvent>() class so that the button behavior code can use the
-        // constructor parameters that are accessible here. See the LoginScreen buttons for an example.
+
+        // Add behavior to the purchase button
+        purchase.setOnAction(e -> {
+            String transactionDetails = getTransactionDetails();
+            BuyerConfirmationScreen confirmationScreen = new BuyerConfirmationScreen(transactionDetails);
+            Stage confirmationStage = new Stage();
+            confirmationScreen.start(confirmationStage);
+
+            // Save the transaction details to a file
+            saveTransactionToFile(transactionDetails);
+        });
+
         logAndPurchaseButtons.getChildren().addAll(logOut, purchase);
 
         // This adds the main components to the screen
         entireContainer.getChildren().addAll(leftContainer, displaySun, rightContainer);
         this.setCenter(entireContainer);
         this.setBottom(logAndPurchaseButtons);
-
     }
 
     public void handleSelection(CheckBox used, CheckBox likeNew, CheckBox moderatelyUsed, CheckBox heavilyUsed, ComboBox<String> genres, VBox filteredItems) {
         filteredItems.getChildren().clear();
         ArrayList<String> filteredBooks = new ArrayList<>();
-        String selectedGenre = (String) genres.getValue();
+        String selectedGenre = genres.getValue();
 
-        if(selectedGenre == null || selectedGenre.isEmpty()) {
+        if (selectedGenre == null || selectedGenre.isEmpty()) {
             filteredItems.getChildren().add(new Label("Please select a genre."));
             return;
         }
-            for(int i = 0; i < addBooksToFile.size(); i++) {
-                String book = addBooksToFile.get(i);
-                boolean matches = false;
-                if(used.isSelected() && book.contains("Condition: Used")) {
-                    matches = true;
-                }
-                if(likeNew.isSelected() && book.contains("Condition: Like New")) {
-                    matches = true;
-                }
-                if(moderatelyUsed.isSelected() && book.contains("Condition: Moderately Used")) {
-                    matches = true;
-                }
-                if(heavilyUsed.isSelected() && book.contains("Condition: Heavily Used")) {
-                    matches = true;
-                }
-                boolean genreMatch = book.contains("Genre: " + selectedGenre);
+        for (String book : addBooksToFile) {
+            boolean matches = false;
+            if (used.isSelected() && book.contains("Condition: Used")) matches = true;
+            if (likeNew.isSelected() && book.contains("Condition: Like New")) matches = true;
+            if (moderatelyUsed.isSelected() && book.contains("Condition: Moderately Used")) matches = true;
+            if (heavilyUsed.isSelected() && book.contains("Condition: Heavily Used")) matches = true;
+            boolean genreMatch = book.contains("Genre: " + selectedGenre);
 
-                if(matches && genreMatch) {
-                    filteredBooks.add(book);
-                }
-            }
-        for(int i = 0; i < filteredBooks.size(); i++) {
-            String book = filteredBooks.get(i);
+            if (matches && genreMatch) filteredBooks.add(book);
+        }
+        for (String book : filteredBooks) {
             String title = book.split("Title: ")[1].split(" \\| ")[0];
             filteredItems.getChildren().add(new Label(title));
             filteredItems.getChildren().add(new CheckBox());
@@ -160,13 +150,13 @@ public class BuyerMainScreen extends BorderPane{
     }
 
     private void getDataFromTextDB() {
-        String currLine = "";
+        String currLine;
         try {
             InputStream is = getClass().getResourceAsStream("/booksAvailable.txt");
             InputStreamReader reader = new InputStreamReader(is);
             BufferedReader buffer = new BufferedReader(reader);
 
-            while((currLine = buffer.readLine()) != null) {
+            while ((currLine = buffer.readLine()) != null) {
                 addBooksToFile.add(currLine);
             }
             buffer.close();
@@ -174,11 +164,32 @@ public class BuyerMainScreen extends BorderPane{
         } catch (Exception e) {
             System.out.println("Error reading in the database");
         }
+    }
 
+    private String getTransactionDetails() {
+        StringBuilder details = new StringBuilder("Books Purchased:\n");
+        for (int i = 0; i < filteredItems.getChildren().size(); i++) {
+            if (filteredItems.getChildren().get(i) instanceof CheckBox) {
+                CheckBox checkBox = (CheckBox) filteredItems.getChildren().get(i);
+                if (checkBox.isSelected()) {
+                    Label bookLabel = (Label) filteredItems.getChildren().get(i - 1);
+                    details.append(bookLabel.getText()).append("\n");
+                }
+            }
+        }
+        return details.toString();
+    }
+
+    private void saveTransactionToFile(String transactionDetails) {
+        try (FileWriter writer = new FileWriter("transactions.txt", true)) {
+            writer.write(transactionDetails + "\n");
+        } catch (IOException e) {
+            System.out.println("Error saving transaction: " + e.getMessage());
+        }
     }
 
     public ArrayList<String> getBookData() {
         return addBooksToFile;
     }
-
 }
+
