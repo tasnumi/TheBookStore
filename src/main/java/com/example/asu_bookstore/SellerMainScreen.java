@@ -199,14 +199,15 @@ public class SellerMainScreen extends BorderPane {
                 printData.getChildren().add(error);
                 return;
             }
-        for(int i=0; i<bookDatabase.size(); i++) {
-            if(!Objects.equals(title.getText(), bookDatabase.get(i))) {
-                Label error = new Label("Please enter a correct title");
-                printData.getChildren().add(error);
-                return;
-            }
+    //   for(int i=0; i<bookDatabase.size(); i++) {
+        //    if(!Objects.equals(title.getText(), bookDatabase.get(i))) {
+        //       System.out.println(bookDatabase.get(i));
+        //       Label error = new Label("Please enter a correct title");
+        //       printData.getChildren().add(error);
+        //        return;
+        //    }
             // System.out.println();
-        }
+      //  }
         //This si the code for the prices
 
             try {
