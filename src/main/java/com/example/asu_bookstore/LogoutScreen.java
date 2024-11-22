@@ -31,6 +31,17 @@ public class LogoutScreen extends BorderPane {
         goldBackgroundRight.setFill(Color.web("#ae7219"));
         this.getChildren().add(goldBackgroundRight);
 
+        // The sun image is loaded from the program's resources folder and is placed into the scene
+        InputStream sunLogoStream = getClass().getResourceAsStream("/loginSun.png");
+        Image sun = new Image(sunLogoStream);
+        ImageView displaySun = new ImageView();
+        displaySun.setImage(sun);
+        displaySun.setFitWidth(125);
+        displaySun.setPreserveRatio(true); // sun image is expanded but aspect ratio should be preserved
+        displaySun.setX((WIDTH/2.5) + 7);
+        displaySun.setY(HEIGHT/13);
+        this.getChildren().add(displaySun);
+
         // Main container to hold the logout screen's interface elements
         VBox logoutContainer = new VBox();
         logoutContainer.setMinWidth(WIDTH);
