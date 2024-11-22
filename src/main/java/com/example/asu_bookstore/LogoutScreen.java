@@ -1,5 +1,7 @@
 package com.example.asu_bookstore;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -10,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+
+import java.io.InputStream;
 
 // This com.example.asu_bookstore.LogoutScreen class holds the layout and functionality of the program's logout screen.
 // It provides an option for the user to log out and navigate back to the login screen.
