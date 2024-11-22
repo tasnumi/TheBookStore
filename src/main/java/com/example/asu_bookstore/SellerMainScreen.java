@@ -207,6 +207,7 @@ public class SellerMainScreen extends BorderPane {
             }
             // System.out.println();
         }
+        //This si the code for the prices
 
             try {
 
