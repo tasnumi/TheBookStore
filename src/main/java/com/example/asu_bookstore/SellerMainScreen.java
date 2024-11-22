@@ -113,14 +113,15 @@ public class SellerMainScreen extends BorderPane {
 
         //calculation for the price of the books to be sold
         //double price=0.00;
-        VBox printData = new VBox();
+        VBox printData = new VBox(10);
+
 
 
         leftContainer.getChildren().addAll(label1, checkbox1, checkbox2, checkbox3, checkbox4, label2, combobox, label3, text,label4, title);
 
         Button listBook = new Button("List Book");
         // This VBox contains everything on the right (list of selectable books selected by user)
-        VBox rightContainer = new VBox();
+        VBox rightContainer = new VBox(10);
         rightContainer.setStyle("-fx-background-color: #be96c4; -fx-border-color: #8273da; -fx-border-width: 0.5; -fx-padding: 20");
         rightContainer.setMinWidth((WIDTH / 2.5) - 30);
         rightContainer.setMaxHeight(HEIGHT - 60);
@@ -185,63 +186,98 @@ public class SellerMainScreen extends BorderPane {
     }
     public void HandleOptions(RadioButton checkbox1, RadioButton checkbox2, RadioButton checkbox3, RadioButton checkbox4, TextField text, ComboBox<String> combobox, VBox printData, TextField title,  ArrayList<String> bookDatabase) {
         printData.getChildren().clear();
+        ArrayList<String> f = new ArrayList<>();
+       
 
 
-        String selectedGenre = (String)combobox.getValue();
+        String selectedGenre = (String) combobox.getValue();
 
-       // if (checkbox1.isSelected() || checkbox2.isSelected() || checkbox3.isSelected() || checkbox4.isSelected() && !selectedGenre.isEmpty() && !text.getText().isEmpty()) {
-            if (selectedGenre == null || selectedGenre.isEmpty()) {
-                Label error = new Label("Please enter a genre");
-                printData.getChildren().add(error);
-                return;
+        // if (checkbox1.isSelected() || checkbox2.isSelected() || checkbox3.isSelected() || checkbox4.isSelected() && !selectedGenre.isEmpty() && !text.getText().isEmpty()) {
+        if (selectedGenre == null || selectedGenre.isEmpty()) {
+            Label error = new Label("Please enter a genre");
+            error.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+
+            printData.getChildren().add(error);
+            return;
+        }
+        if (text.getText() == null || text.getText().isEmpty()) {
+            Label error = new Label("Please input a price");
+            error.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+
+            printData.getChildren().add(error);
+            return;
+        }
+
+        for (int i = 0; i < bookDatabase.size(); i++) {
+            String book = bookDatabase.get(i);
+            boolean matches = false;
+            if (checkbox1.isSelected() && book.contains("Condition: Used")) {
+                matches = true;
             }
-            if(text.getText() == null || text.getText().isEmpty()) {
-                Label error = new Label("Please input a price");
-                printData.getChildren().add(error);
-                return;
+            if (checkbox2.isSelected() && book.contains("Condition: Like New")) {
+                matches = true;
             }
-    //   for(int i=0; i<bookDatabase.size(); i++) {
-        //    if(!Objects.equals(title.getText(), bookDatabase.get(i))) {
-        //       System.out.println(bookDatabase.get(i));
-        //       Label error = new Label("Please enter a correct title");
-        //       printData.getChildren().add(error);
-        //        return;
-        //    }
-            // System.out.println();
-      //  }
-        //This si the code for the prices
-
-            try {
-
-                    int inputVal = Integer.parseInt(text.getText());
-                if (checkbox1.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) && inputVal > 0) {
-                   double price=inputVal*0.70;
-                    String p = String.format("This is your price $%.2f", price);
-                    Label label = new Label(p);
-                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
-                    printData.getChildren().add(label);
-                } else if(checkbox2.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) && inputVal > 0) {
-                    double price=inputVal*0.90;
-                    String p = String.format("This is your price $%.2f", price);
-                    Label label = new Label(p);
-                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
-                    printData.getChildren().add(label);
-                } else if(checkbox3.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) & inputVal > 0) {
-                    double price=inputVal*0.85;
-                    String p = String.format("This is your price $%.2f", price);
-                    Label label = new Label(p);
-                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
-                    printData.getChildren().add(label);
-                } else if(checkbox4.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others") ) & inputVal > 0) {
-                    double price=inputVal*0.50;
-                    String p = String.format("This is your price $%.2f", price);
-                    Label label = new Label(p);
-                    label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
-                    printData.getChildren().add(label);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if (checkbox3.isSelected() && book.contains("Condition: Moderately Used")) {
+                matches = true;
             }
+            if (checkbox4.isSelected() && book.contains("Condition: Heavily Used")) {
+                matches = true;
+            }
+            boolean genreCheck = book.contains("Genre: " + selectedGenre);
+
+            if (matches && genreCheck) {
+                f.add(book);
+            }
+        }
+
+        String t = null;
+        for (int i = 0; i < f.size(); i++) {
+            String book = f.get(i);
+            t = book.split("Title: ")[1].split(" \\| ")[0];
+
+        }
+        if (!Objects.equals(t, title.getText())) {
+        Label label = new Label("This Book is not in the Database");
+            label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+            printData.getChildren().add(label);
+        return;
+        }
+
+
+
+
+
+        try {
+
+            int inputVal = Integer.parseInt(text.getText());
+            if (checkbox1.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others")) && inputVal > 0) {
+                double price = inputVal * 0.70;
+                String p = String.format("This is your price $%.2f", price);
+                Label label = new Label(p);
+                label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+                printData.getChildren().add(label);
+            } else if (checkbox2.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others")) && inputVal > 0) {
+                double price = inputVal * 0.90;
+                String p = String.format("This is your price $%.2f", price);
+                Label label = new Label(p);
+                label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+                printData.getChildren().add(label);
+            } else if (checkbox3.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others")) & inputVal > 0) {
+                double price = inputVal * 0.85;
+                String p = String.format("This is your price $%.2f", price);
+                Label label = new Label(p);
+                label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+                printData.getChildren().add(label);
+            } else if (checkbox4.isSelected() && (selectedGenre.equals("Natural Science") || selectedGenre.equals("Math") || selectedGenre.equals("Computer") || selectedGenre.equals("English") || selectedGenre.equals("Language") || selectedGenre.equals("Others")) & inputVal > 0) {
+                double price = inputVal * 0.50;
+                String p = String.format("This is your price $%.2f", price);
+                Label label = new Label(p);
+                label.setStyle(" -fx-font: 15 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+                printData.getChildren().add(label);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
