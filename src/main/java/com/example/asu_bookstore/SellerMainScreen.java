@@ -149,6 +149,7 @@ public class SellerMainScreen extends BorderPane {
         Button logOut = new Button("Log Out");
         Button purchase = new Button("Sell");
 
+        logOut.setOnAction(e -> control.switchScreen(""));
 
         // The behavior for these buttons can be defined here, which might be easier that creating
         // a separate ButtonHandler<ActionEvent>() class so that the button behavior code can use the

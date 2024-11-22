@@ -105,6 +105,9 @@ public class BuyerMainScreen extends BorderPane{
         logAndPurchaseButtons.setSpacing(WIDTH/2);
         logAndPurchaseButtons.setPadding(new Insets(0, 0, 5, 140));
         Button logOut = new Button("Log Out");
+
+        logOut.setOnAction(e -> control.switchScreen(""));
+
         Button purchase = new Button("Purchase");
         // The behavior for these buttons can be defined here, which might be easier that creating
         // a separate ButtonHandler<ActionEvent>() class so that the button behavior code can use the
