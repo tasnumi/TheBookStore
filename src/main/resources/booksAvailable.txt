@@ -1,48 +1,48 @@
-Title: The Secret Lives of Plants | Author: Emily Hawthorne | Published Year: 1999 | Condition: Heavily Used | Genre: Natural Science
+Title: The Secret Lives of Plants | Author: Emily Hawthorne | Published Year: 1999 | Condition: Heavily Used | Genre: Natural Science | Price: 20.00
 
-Title: The Age of Dinosaurs | Author: James Winters | Published Year: 2005 | Condition: Like New | Genre: Natural Science
+Title: The Age of Dinosaurs | Author: James Winters | Published Year: 2005 | Condition: Like New | Genre: Natural Science | Price: 45.00
 
-Title: The Biome Chronicles | Author: Ava Blackwood | Published Year: 2010 | Condition: Used | Genre: Natural Science
+Title: The Biome Chronicles | Author: Ava Blackwood | Published Year: 2010 | Condition: Used | Genre: Natural Science | Price: 30.00
 
-Title: The Physics of Natural Disasters | Author: Ethan Prescott | Published Year: 2017 | Condition: Moderately Used | Genre: Natural Science
+Title: The Physics of Natural Disasters | Author: Ethan Prescott | Published Year: 2017 | Condition: Moderately Used | Genre: Natural Science | Price: 55.00
 
-Title: The Art of Coding | Author: Olivia Sterling | Published Year: 2012 | Condition: Heavily Used | Genre: Computer
+Title: The Art of Coding | Author: Olivia Sterling | Published Year: 2012 | Condition: Heavily Used | Genre: Computer | Price: 60.00
 
-Title: The Secret Life of Databases | Author: Liam Montgomery | Published Year: 2015 | Condition: Like New | Genre: Computer
+Title: The Secret Life of Databases | Author: Tasnim Haque | Published Year: 2015 | Condition: Like New | Genre: Computer | Price: 70.00
 
-Title: Mastering C++ | Author: Sophia Devereux | Published Year: 2008 | Condition: Used | Genre: Computer
+Title: Mastering C++ | Author: Basim Khokhar | Published Year: 2008 | Condition: Used | Genre: Computer | Price: 55.00
 
-Title: Understanding Operating Systems | Author: Lucas Carver | Published Year: 2011 | Condition: Moderately Used | Genre: Computer
+Title: Understanding Operating Systems | Author: Lucas Carver | Published Year: 2011 | Condition: Moderately Used | Genre: Computer | Price: 75.00
 
-Title: The Geometry of Nature | Author: Isabella Greyson | Published Year: 2013 | Condition: Heavily Used | Genre: Math
+Title: The Geometry of Nature | Author: Isabella Greyson | Published Year: 2013 | Condition: Heavily Used | Genre: Math | Price: 35.00
 
-Title: The Physics of Natural Disasters | Author: Mason Wright | Published Year: 2016 | Condition: Like New | Genre: Math
+Title: The Physics of Natural Disasters | Author: Mason Wright | Published Year: 2016 | Condition: Like New | Genre: Math | Price: 28.00
 
-Title: The Art of Proof | Author: Amelia Stone | Published Year: 2007 | Condition: Used | Genre: Math
+Title: The Art of Proof | Author: Amelia Stone | Published Year: 2007 | Condition: Used | Genre: Math | Price: 43.00
 
-Title: The Calculus of Variations | Author: Noah Bennett | Published Year: 2019 | Condition: Moderately Used | Genre: Math
+Title: The Calculus of Variations | Author: Noah Bennett | Published Year: 2019 | Condition: Moderately Used | Genre: Math | Price: 65.00
 
-Title: Whispers in the Wind | Author: Chloe Rivers | Published Year: 2003 | Condition: Heavily Used | Genre: English
+Title: Whispers in the Wind | Author: Chloe Rivers | Published Year: 2003 | Condition: Heavily Used | Genre: English | Price: 40.00
 
-Title: Echoes of the Past | Author: Benjamin Cross | Published Year: 2011 | Condition: Like New | Genre: English
+Title: Echoes of the Past | Author: Satoru Gojo | Published Year: 2011 | Condition: Like New | Genre: English | Price: 43.00
 
-Title: The Last Letter | Author: Grace Montgomery | Published Year: 2007 | Condition: Used | Genre: English
+Title: The Last Letter | Author: Grace Montgomery | Published Year: 2007 | Condition: Used | Genre: English | Price: 26.00
 
-Title: A Symphony of Words | Author: Victoria Lancaster | Published Year: 2014 | Condition: Moderately Used | Genre: English
+Title: A Symphony of Words | Author: Victoria Lancaster | Published Year: 2014 | Condition: Moderately Used | Genre: English | Price: 52.00
 
-Title: The Art of Linguistic Expression | Author: Samuel Rothschild | Published Year: 2010 | Condition: Heavily Used | Genre: Language
+Title: The Art of Linguistic Expression | Author: Samuel Rothschild | Published Year: 2010 | Condition: Heavily Used | Genre: Language | Price: 80.00
 
-Title: Words in Motion | Author: Charlotte Mitchell | Published Year: 1989 | Condition: Like New | Genre: Language
+Title: Words in Motion | Author: Charlotte Mitchell | Published Year: 1989 | Condition: Like New | Genre: Language | Price: 60.00
 
-Title: Breaking Down Grammar | Author: Oliver Donovan | Published Year: 2017 | Condition: Used | Genre: Language
+Title: Breaking Down Grammar | Author: Oliver Donovan | Published Year: 2017 | Condition: Used | Genre: Language | Price: 41.00
 
-Title: A World of Words | Author: Harrison Langley | Published Year: 2006 | Condition: Moderately Used | Genre: Language
+Title: A World of Words | Author: Harrison Langley | Published Year: 2006 | Condition: Moderately Used | Genre: Language | Price: 21.00
 
-Title: Into the Unknown | Author: Samuel Rothschild | Published Year: 2010 | Condition: Heavily Used | Genre: Other
+Title: Into the Unknown | Author: Samuel Rothschild | Published Year: 2010 | Condition: Heavily Used | Genre: Other | Price: 63.00
 
-Title: Wandering Souls | Author: Clara Winthrop | Published Year: 1989 | Condition: Like New | Genre: Other
+Title: Wandering Souls | Author: Clara Winthrop | Published Year: 1989 | Condition: Like New | Genre: Other | Price: 35.00
 
-Title: The Eternal Puzzle | Author: Marcus Fields | Published Year: 2017 | Condition: Used | Genre: Other
+Title: The Eternal Puzzle | Author: Eeyore Maahm | Published Year: 2017 | Condition: Used | Genre: Other | Price: 54.00
 
-Title: Whispers from the Void | Author: Evelyn Waters | Published Year: 2006 | Condition: Moderately Used | Genre: Other
+Title: Whispers from the Void | Author: Evelyn Yohannan | Published Year: 2006 | Condition: Moderately Used | Genre: Other | Price: 100.00
 

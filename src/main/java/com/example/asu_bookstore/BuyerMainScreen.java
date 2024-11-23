@@ -128,10 +128,11 @@ public class BuyerMainScreen extends BorderPane{
                 if(filteredItems.getChildren().get(i) instanceof CheckBox) {
                     if (((CheckBox) filteredItems.getChildren().get(i)).isSelected()) {
                         selectedBooks.add(((Label) filteredItems.getChildren().get(i - 1)).getText());
-                        control.getBuyerMainConfirmationScreen().constructPurchaseInfo(this);
                     }
                 }
             }
+
+            control.getBuyerMainConfirmationScreen().constructPurchaseInfo(this);
 
             if (!selectedBooks.isEmpty()) {
                 used.setSelected(false);
@@ -161,6 +162,10 @@ public class BuyerMainScreen extends BorderPane{
         filteredBooks = new ArrayList<String>();
         String selectedGenre = (String) genres.getValue();
 
+        if(!used.isSelected() && !likeNew.isSelected()  && !moderatelyUsed.isSelected() && !heavilyUsed.isSelected()) {
+            filteredItems.getChildren().add(new Label("Please select the condition of the book."));
+        }
+
         if(selectedGenre == null || selectedGenre.isEmpty()) {
             filteredItems.getChildren().add(new Label("Please select a genre."));
             return;
@@ -189,7 +194,6 @@ public class BuyerMainScreen extends BorderPane{
         for(int i = 0; i < filteredBooks.size(); i++) {
             String book = filteredBooks.get(i);
             String title = book.split("Title: ")[1].split(" \\| ")[0];
-            //selectedBooks.add(title);
             filteredItems.getChildren().add(new Label(title));
             filteredItems.getChildren().add(new CheckBox());
         }

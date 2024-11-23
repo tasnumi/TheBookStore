@@ -1,0 +1,10 @@
+----------------------------------------------------------------------------------
+BUYER
+Title: The Physics of Natural Disasters | Price: 28.00 | Category: Math
+Title: The Calculus of Variations | Price: 65.00 | Category: Math
+----------------------------------------------------------------------------------
+BUYER
+Title: Words in Motion | Price: 60.00 | Category: Language
+Title: Breaking Down Grammar | Price: 41.00 | Category: Language
+Title: A World of Words | Price: 21.00 | Category: Language
+----------------------------------------------------------------------------------
