@@ -44,19 +44,19 @@ public class ASU_Bookstore extends Application {
 
     // authentication of user already done in com.example.asu_bookstore.LoginScreen object
     public void switchScreen(String screen) {
-        if (screen.equals("admin")) {
+        if (screen.equals("admin")) {  //going to the admin screen
             root.setCenter(admin);
         }
-        else if (screen.equals("buyer")) {
+        else if (screen.equals("buyer")) { //going to the buyer screen
             root.setCenter(buyer);
         }
-        else if (screen.equals("seller")) {
+        else if (screen.equals("seller")) { //going to the seller screen
             root.setCenter(seller);
         }
-        else if (screen.equals("buyerConfirm")) {
+        else if (screen.equals("buyerConfirm")) { //going to the buyer confirmation screen
             root.setCenter(buyerConfimScreen);
         }
-        else if (screen.equals("sellerConfirm")) {
+        else if (screen.equals("sellerConfirm")) { //going to the seller confirmation screen
             root.setCenter(sellerConfimScreen);
         }
         else { //going back to login page
@@ -64,10 +64,16 @@ public class ASU_Bookstore extends Application {
         }
     }
 
+    // This is a simple getter method for the buyerConfimScreen screen that is primarily
+    // used by the BuyerMainScreen to easily write the books being bought to both the
+    // Buyer Confirmation Screen and to the buyerHistory.txt file.
     public BuyerConfirmationScreen getBuyerMainConfirmationScreen() {
         return buyerConfimScreen;
     }
 
+    // This is a simple getter method for the sellerConfimScreen screen that is primarily
+    // used by the SellerMainScreen to easily write the books being sold to both the
+    // Seller Confirmation Screen and to the sellerHistory.txt file.
     public SellerConfirmationScreen getSellerConfimScreen() {
         return sellerConfimScreen;
     }

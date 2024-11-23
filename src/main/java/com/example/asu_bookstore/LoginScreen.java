@@ -64,20 +64,20 @@ public class LoginScreen extends BorderPane{
         // Setting the userType buttons and placing labels next to them
         GridPane userContainer = new GridPane();
         userContainer.setAlignment(Pos.CENTER);
-        userChoice = new ToggleGroup();
+        userChoice = new ToggleGroup(); // This togglegroup will allow only 1 userchoice to be selected
         adminUser = new RadioButton();
         buyerUser = new RadioButton();
         sellerUser = new RadioButton();
         Label adminLabel = new Label("Admin User");
         Label buyerLabel = new Label("Buyer");
         Label sellerLabel = new Label("Seller");
-        adminLabel.setTextFill(Color.WHITE);
+        adminLabel.setTextFill(Color.WHITE); // decorating the buttons
         buyerLabel.setTextFill(Color.WHITE);
         sellerLabel.setTextFill(Color.WHITE);
         adminUser.setToggleGroup(userChoice);
         buyerUser.setToggleGroup(userChoice);
         sellerUser.setToggleGroup(userChoice);
-        userContainer.add(adminUser, 0, 1);
+        userContainer.add(adminUser, 0, 1); // adding the user types and buttons in a gridlike fasion
         userContainer.add(buyerUser, 0, 2);
         userContainer.add(sellerUser, 0, 3);
         userContainer.add(adminLabel, 3, 1);
@@ -105,6 +105,7 @@ public class LoginScreen extends BorderPane{
         login.setMaxSize(250, 250);
         createAccount.setMaxSize(125, 125);
 
+        // adding all nodes from above to the Login screen
         txtAndButtons.getChildren().addAll(select, userContainer, inputUserName, inputPassword, login, createAccount);
         this.setCenter(txtAndButtons);
 
@@ -138,8 +139,9 @@ public class LoginScreen extends BorderPane{
         });
 
         // This section of code defines the functionality of the create account button. When clicked, the inputed user
-        // credentials are sent to the com.example.asu_bookstore.AdminScreen object for proper checking. If successful, the user logs in
-        // if unsuccessful an alert is given to the user informing them of the results.
+        // This section of code defines the functionality of the create account button. When clicked, the inputed user
+        // credentials are sent to the com.example.asu_bookstore.AdminScreen object for proper checking. If successful,
+        // the user logs in. If unsuccessful an alert is given to the user informing them of the results.
         createAccount.setOnAction(e -> {
             String selectedToggle = checkToggle(userChoice);
             // Must first check to make sure all feilds have information in them and that the user is not attempting
@@ -172,22 +174,21 @@ public class LoginScreen extends BorderPane{
                     createFail.showAndWait();
                 }
             }
-
         });
     }
 
     // This simple checkToggle method simply checks which user type radiobutton is selected
     // from the login page and returns the result as a string.
     private String checkToggle(ToggleGroup userChoice) {
-        if (userChoice.getSelectedToggle() == adminUser) {
+        if (userChoice.getSelectedToggle() == adminUser) { // tell the main file to send the user to the admin screen
             return "admin";
         }
-        else if (userChoice.getSelectedToggle() == buyerUser) {
+        else if (userChoice.getSelectedToggle() == buyerUser) { // tell the main file to send the user to the buyer screen
             return "buyer";
         }
-        else if (userChoice.getSelectedToggle() == sellerUser) {
+        else if (userChoice.getSelectedToggle() == sellerUser) { // tell the main file to send the user to the seller screen
             return "seller";
         }
-        return "";
+        return ""; // tell the main file to send the user to not change any screen
     }
 }
