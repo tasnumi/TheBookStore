@@ -1,8 +1,5 @@
 package com.example.asu_bookstore;
-
-import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,19 +8,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-
 import java.io.*;
-import java.util.ArrayList;
 
+// This com.example.asu_bookstore.SellerConfirmationScreen class hosts the seller's transactions in the program. This class is
+// also used by the SellerMainScreen for event handling whenever a user wants to sell a book.
 public class SellerConfirmationScreen extends BorderPane {
-    private String bookSoldTitle;
-    private Label soldBook;
-    private double totalPrice = 0.00;
-    private Label totalPriceLabel;
+    private String bookSoldTitle; //represents the title of the book that is sold along with the price
+    private Label soldBook; //represents the book that is sold
+    private double totalPrice = 0.00; //contains the price that changes dynamically
+    private Label totalPriceLabel; //contains the label for the total price that changes dynamically
 
     public SellerConfirmationScreen(final int WIDTH, final int HEIGHT, ASU_Bookstore control) {
-        Rectangle lightRedBackground = new Rectangle(WIDTH, WIDTH);
+        Rectangle lightRedBackground = new Rectangle(WIDTH, WIDTH); //light red background
         lightRedBackground.setFill(Color.web("#e9cdd6"));
         this.getChildren().add(lightRedBackground);
 
@@ -40,8 +36,8 @@ public class SellerConfirmationScreen extends BorderPane {
         displaySun.setPreserveRatio(true); // sun image is expanded but aspect ratio should be preserved
         displaySun.setX((WIDTH/2.5) + 7);
         displaySun.setY(HEIGHT/13);
-        //this.getChildren().add(displaySun);
 
+        //labels for front-end portion of the code.
         Label thankYou = new Label("Thank you for selling your book to the ASU Bookstore!");
         Label purchaseTotal = new Label("Here are your sale details:");
 
@@ -49,20 +45,33 @@ public class SellerConfirmationScreen extends BorderPane {
 
         totalPriceLabel = new Label();
 
+        //sets the button backToHome to go back to the login screen by switching screens.
         Button backToHome = new Button("Back to Login");
         backToHome.setOnAction(e -> {
 
             control.switchScreen("");
         });
 
-        VBox allNodes = new VBox();
-        allNodes.getChildren().addAll(thankYou, purchaseTotal, soldBook, displaySun, backToHome, totalPriceLabel);
+        //this VBox sets all the labels, buttons, image, and pricing.
+        VBox allNodes = new VBox(20);
+        allNodes.getChildren().addAll(thankYou, purchaseTotal, soldBook, displaySun, totalPriceLabel);
+
+        //styling for labels for font size and color.
+        thankYou.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-underline: true;");
+        purchaseTotal.setStyle("-fx-text-fill: white;");
+        allNodes.setStyle("-fx-font-size: 15px;");
+        soldBook.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-underline: true;");
+        backToHome.setStyle("-fx-background-color:#e9cdd6;");
         allNodes.setAlignment(Pos.CENTER);
 
+        //centers every item in the VBox towards the center.
         this.setCenter(allNodes);
 
     }
 
+    //This method contains the functionality for grabbing the title, price, and genre of the book that the user is selling. The labels
+    //display the title, price, and genre on the main screen. The method also calls the text writing method to display the dashes and book information
+    //in the database.
     public void constructSaleInfo(SellerMainScreen seller) {
         String title = seller.title.getText();
         String price = seller.text.getText();
@@ -73,6 +82,9 @@ public class SellerConfirmationScreen extends BorderPane {
         writeHistory(title, price, genre);
         writeBottomDashes();
     }
+
+    //This method overwrites the database textfile sellingHistory which represents the database of sold books transactions. Everytime a user sells a book
+    //it's formatted the same way as the book available database but only contains the title, price, and category instead.
 
     private void writeHistory(String title, String price, String category) {
         try {
@@ -90,6 +102,8 @@ public class SellerConfirmationScreen extends BorderPane {
         }
     }
 
+    //This method is to make the database for seller confirmation screen easily readable for developers by adding dashed lines to split everytime
+    //another transaction is made.
     private void writeBottomDashes() {
         try {
             FileOutputStream outS = new FileOutputStream("src/main/resources/sellingHistory.txt", true); // true parameter makes it write at the file's end
