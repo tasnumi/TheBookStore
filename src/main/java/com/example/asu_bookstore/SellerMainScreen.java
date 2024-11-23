@@ -20,6 +20,10 @@ import java.util.Objects;
 // This com.example.asu_bookstore.SellerMainScreen class will eventually host the seller's screen in the program.
 public class SellerMainScreen extends BorderPane {
     ScrollPane r = new ScrollPane();
+    TextField title;
+    TextField text;
+    ComboBox<String> combobox;
+
     public SellerMainScreen(final int WIDTH, final int HEIGHT, ASU_Bookstore control) {
         ASU_Bookstore bookstore = new ASU_Bookstore();
         BuyerMainScreen buyer = new BuyerMainScreen(WIDTH, HEIGHT, bookstore);
@@ -91,21 +95,20 @@ public class SellerMainScreen extends BorderPane {
         //   label2.setPadding(new Insets(20,0,15,0));
         label2.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
 
-        ComboBox<String> combobox = new ComboBox<>();
+        combobox = new ComboBox<>();
         combobox.getItems().addAll("Natural Science", "Computer", "Math", "English", "Language", "Others");
 
         Label label3 = new Label("Please Enter the Original Book Price:");
         label3.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
         //  label3.setPadding(new Insets(11,0,11,0));
 
-        TextField text = new TextField();
+        text = new TextField();
         text.setPrefWidth(15);
         text.setPrefHeight(15);
 
-
         Label label4 = new Label("Please enter the book title");
         label4.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
-        TextField title = new TextField();
+        title = new TextField();
         title.setPrefWidth(15);
         title.setPrefHeight(15);
 
@@ -178,7 +181,15 @@ public class SellerMainScreen extends BorderPane {
         });
 
         purchase.setOnAction(e -> {
+            control.getSellerConfimScreen().constructSaleInfo(this);
 
+            // "refreshing" the screen for the next user to have a blank slate
+            t.selectToggle(null);
+            combobox.getSelectionModel().clearSelection();
+            text.clear();
+            title.clear();
+
+            control.switchScreen("sellerConfirm");
         });
 
         // The behavior for these buttons can be defined here, which might be easier that creating
@@ -191,13 +202,10 @@ public class SellerMainScreen extends BorderPane {
         this.setCenter(entireContainer);
         this.setBottom(logAndSellButtons);
 
-
     }
     public void HandleOptions(RadioButton checkbox1, RadioButton checkbox2, RadioButton checkbox3, RadioButton checkbox4, TextField text, ComboBox<String> combobox, VBox printData, TextField title,  ArrayList<String> bookDatabase) {
         printData.getChildren().clear();
         ArrayList<String> f = new ArrayList<>();
-       
-
 
         String selectedGenre = (String) combobox.getValue();
 
@@ -251,10 +259,6 @@ public class SellerMainScreen extends BorderPane {
             printData.getChildren().add(label);
         return;
         }
-
-
-
-
 
         try {
 

@@ -26,7 +26,7 @@ public class ASU_Bookstore extends Application {
             seller = new SellerMainScreen(WIDTH, HEIGHT, this);
             login = new LoginScreen(WIDTH, HEIGHT, admin, this);
             buyerConfimScreen = new BuyerConfirmationScreen(WIDTH, HEIGHT, buyer, this);
-            sellerConfimScreen = new SellerConfirmationScreen(WIDTH, HEIGHT, seller, this);
+            sellerConfimScreen = new SellerConfirmationScreen(WIDTH, HEIGHT, this);
             root.setCenter(login); // displaying the initial screen
             Scene scene = new Scene(root,WIDTH,HEIGHT); // set the entire scene with the root
             primaryStage.setScene(scene);
@@ -66,6 +66,10 @@ public class ASU_Bookstore extends Application {
 
     public BuyerConfirmationScreen getBuyerMainConfirmationScreen() {
         return buyerConfimScreen;
+    }
+
+    public SellerConfirmationScreen getSellerConfimScreen() {
+        return sellerConfimScreen;
     }
 }
 

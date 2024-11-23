@@ -27,9 +27,9 @@ public class BuyerConfirmationScreen extends BorderPane {
         lightGreenBackground.setFill(Color.web("#d2e7da"));
         this.getChildren().add(lightGreenBackground);
 
-        Rectangle greenBackgroundLeft = new Rectangle(200, 0, (WIDTH - 400), HEIGHT);
-        greenBackgroundLeft.setFill(Color.web("#a0c3b1"));
-        this.getChildren().add(greenBackgroundLeft);
+        Rectangle greenBackground = new Rectangle(200, 0, (WIDTH - 400), HEIGHT);
+        greenBackground.setFill(Color.web("#a0c3b1"));
+        this.getChildren().add(greenBackground);
 
         // The sun image is loaded from the program's resources folder and is placed into the scene
         InputStream sunLogoStream = getClass().getResourceAsStream("/BuyingConfirmSun.png");
@@ -42,7 +42,7 @@ public class BuyerConfirmationScreen extends BorderPane {
         displaySun.setY(HEIGHT/13);
         //this.getChildren().add(displaySun);
 
-        Label thankYou = new Label("Thank you for Purchasing with the ASU Bookstore!");
+        Label thankYou = new Label("Thank you for buying your new book from the ASU Bookstore!");
         Label purchaseTotal = new Label("Here are your purchase details:");
 
         allBooks = new Label();
