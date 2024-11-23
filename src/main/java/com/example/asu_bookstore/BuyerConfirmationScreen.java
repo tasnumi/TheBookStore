@@ -1,7 +1,6 @@
 package com.example.asu_bookstore;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ public class BuyerConfirmationScreen extends BorderPane {
         lightGreenBackground.setFill(Color.web("#d2e7da"));
         this.getChildren().add(lightGreenBackground);
 
-        Rectangle greenBackground = new Rectangle(200, 0, (WIDTH - 400), HEIGHT);
+        Rectangle greenBackground = new Rectangle(100, 0, (WIDTH - 200), HEIGHT);
         greenBackground.setFill(Color.web("#a0c3b1"));
         this.getChildren().add(greenBackground);
 
@@ -40,17 +38,21 @@ public class BuyerConfirmationScreen extends BorderPane {
         displaySun.setPreserveRatio(true); // sun image is expanded but aspect ratio should be preserved
         displaySun.setX((WIDTH/2.5) + 7);
         displaySun.setY(HEIGHT/13);
-        //this.getChildren().add(displaySun);
 
         Label thankYou = new Label("Thank you for buying your new book from the ASU Bookstore!");
+        thankYou.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-underline: true;");
         Label purchaseTotal = new Label("Here are your purchase details:");
+        purchaseTotal.setStyle("-fx-text-fill: white;");
 
         allBooks = new Label();
+        allBooks.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-underline: true;");
         allBooks.setText(booksPurchased);
 
         totalPriceLabel = new Label();
+        totalPriceLabel.setStyle("-fx-text-fill: white;");
 
         Button backToHome = new Button("Back to Login");
+        backToHome.setStyle("-fx-background-color: #d2e7da;");
         backToHome.setOnAction(e -> {
             written = false;
             booksPurchased = "";
@@ -58,12 +60,12 @@ public class BuyerConfirmationScreen extends BorderPane {
             control.switchScreen("");
         });
 
-        VBox allNodes = new VBox();
-        allNodes.getChildren().addAll(thankYou, purchaseTotal, allBooks, displaySun, backToHome, totalPriceLabel);
+        VBox allNodes = new VBox(20);
+        allNodes.setStyle("-fx-font-size: 15px;");
+        allNodes.getChildren().addAll(thankYou, purchaseTotal, allBooks, totalPriceLabel, displaySun, backToHome);
         allNodes.setAlignment(Pos.CENTER);
 
         this.setCenter(allNodes);
-
     }
 
     public void constructPurchaseInfo(BuyerMainScreen buyer) {

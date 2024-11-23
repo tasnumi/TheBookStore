@@ -1,8 +1,6 @@
 package com.example.asu_bookstore;
 
-import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,10 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-
 import java.io.*;
-import java.util.ArrayList;
 
 public class SellerConfirmationScreen extends BorderPane {
     private String bookSoldTitle;
@@ -43,7 +38,7 @@ public class SellerConfirmationScreen extends BorderPane {
         //this.getChildren().add(displaySun);
 
         Label thankYou = new Label("Thank you for selling your book to the ASU Bookstore!");
-        Label purchaseTotal = new Label("Here are your sale details:");
+        Label sellTotal = new Label("Here are your sale details:");
 
         soldBook = new Label();
 
@@ -56,7 +51,8 @@ public class SellerConfirmationScreen extends BorderPane {
         });
 
         VBox allNodes = new VBox();
-        allNodes.getChildren().addAll(thankYou, purchaseTotal, soldBook, displaySun, backToHome, totalPriceLabel);
+        allNodes.setStyle("-fx-font-size: 15px;");
+        allNodes.getChildren().addAll(thankYou, sellTotal, soldBook, displaySun, backToHome, totalPriceLabel);
         allNodes.setAlignment(Pos.CENTER);
 
         this.setCenter(allNodes);
