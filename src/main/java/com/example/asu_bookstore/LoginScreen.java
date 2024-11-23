@@ -54,11 +54,13 @@ public class LoginScreen extends BorderPane{
         displaySun.setImage(sun);
         displaySun.setFitWidth(125);
         displaySun.setPreserveRatio(true); // sun image is expanded but aspect ratio should be preserved
-        displaySun.setX((WIDTH/2.5) + 7);
+        displaySun.setX((WIDTH/2.4) + 4);
         displaySun.setY(HEIGHT/13);
         this.getChildren().add(displaySun);
 
         Label select = new Label("Select which user you are:");
+        select.setStyle("-fx-font-size: 26px;");
+        select.setTranslateY(-10);
         select.setTextFill(Color.WHITE);
 
         // Setting the userType buttons and placing labels next to them
