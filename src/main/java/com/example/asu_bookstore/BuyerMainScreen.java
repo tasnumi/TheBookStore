@@ -106,7 +106,15 @@ public class BuyerMainScreen extends BorderPane{
         logAndPurchaseButtons.setPadding(new Insets(0, 0, 5, 140));
         Button logOut = new Button("Log Out");
 
-        logOut.setOnAction(e -> control.switchScreen(""));
+        logOut.setOnAction(e -> {
+            used.setSelected(false);
+            likeNew.setSelected(false);
+            moderatelyUsed.setSelected(false);
+            heavilyUsed.setSelected(false);
+            comboBox.getSelectionModel().clearSelection();
+
+            control.switchScreen("");
+        });
 
         Button purchase = new Button("Purchase");
         // The behavior for these buttons can be defined here, which might be easier that creating
