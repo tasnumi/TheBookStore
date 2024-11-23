@@ -20,16 +20,19 @@ public class BuyerConfirmationScreen extends BorderPane {
     private Label totalPriceLabel;
     private boolean written = false;
 
+    //setup for the screen itself, includes measurements and color
     public BuyerConfirmationScreen(final int WIDTH, final int HEIGHT, BuyerMainScreen buyer, ASU_Bookstore control) {
         Rectangle lightGreenBackground = new Rectangle(WIDTH, WIDTH);
         lightGreenBackground.setFill(Color.web("#d2e7da"));
         this.getChildren().add(lightGreenBackground);
 
+        //sets up the size for the rectangle for display
         Rectangle greenBackground = new Rectangle(100, 0, (WIDTH - 200), HEIGHT);
         greenBackground.setFill(Color.web("#a0c3b1"));
         this.getChildren().add(greenBackground);
 
         // The sun image is loaded from the program's resources folder and is placed into the scene
+        //sets the sizing for the photo of the sun picture we have
         InputStream sunLogoStream = getClass().getResourceAsStream("/BuyingConfirmSun.png");
         Image sun = new Image(sunLogoStream);
         ImageView displaySun = new ImageView();
@@ -39,6 +42,8 @@ public class BuyerConfirmationScreen extends BorderPane {
         displaySun.setX((WIDTH/2.5) + 7);
         displaySun.setY(HEIGHT/13);
 
+        //labels for the thank-you message that appears on screen
+        //their color is set to white, and they are bolded and underlined as well
         Label thankYou = new Label("Thank you for buying your new book from the ASU Bookstore!");
         thankYou.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-underline: true;");
         Label purchaseTotal = new Label("Here are your purchase details:");
@@ -51,6 +56,8 @@ public class BuyerConfirmationScreen extends BorderPane {
         totalPriceLabel = new Label();
         totalPriceLabel.setStyle("-fx-text-fill: white;");
 
+        //this button sends the user back to the login
+        //it and sets the values back to their original null states
         Button backToHome = new Button("Back to Login");
         backToHome.setStyle("-fx-background-color: #d2e7da;");
         backToHome.setOnAction(e -> {
@@ -59,7 +66,7 @@ public class BuyerConfirmationScreen extends BorderPane {
             totalPrice = 0.0;
             control.switchScreen("");
         });
-
+// vbox to display messages, logo, buttons
         VBox allNodes = new VBox(20);
         allNodes.setStyle("-fx-font-size: 15px;");
         allNodes.getChildren().addAll(thankYou, purchaseTotal, allBooks, totalPriceLabel, displaySun, backToHome);
@@ -67,13 +74,14 @@ public class BuyerConfirmationScreen extends BorderPane {
 
         this.setCenter(allNodes);
     }
-
+// filtration for the books in order to get the titles specifically
+    //values are set to null
     public void constructPurchaseInfo(BuyerMainScreen buyer) {
         Label booksBought = new Label();
         double runningTotal = 0.00;
         String boughtList = "";
         //written = false;
-
+//empty arraylist filled with values filtered bu regex, does the pricing calculation
         ArrayList<String> allSelectedBooks = new ArrayList<String>();
         writeBUYER();
         for (int i = 0; i < buyer.selectedBooks.size(); i++) {
@@ -95,7 +103,8 @@ public class BuyerConfirmationScreen extends BorderPane {
         totalPriceLabel.setText(price);
         written = true;
     }
-
+// writes the title, price, and category
+    //it stores it in a file
     private void writeHistory(String title, String price, String category) {
         try {
             FileOutputStream outS = new FileOutputStream("src/main/resources/buyingHistory.txt", true); // true parameter makes it write at the file's end
@@ -111,7 +120,8 @@ public class BuyerConfirmationScreen extends BorderPane {
             System.out.println("CRITICAL ERROR IN CREATING THE FILE WRITER!!!");
         }
     }
-
+        // writes to the buyers to a text file
+        //if the file is not able to be read an error is thrown
     private void writeBUYER() {
         try {
             FileOutputStream outS = new FileOutputStream("src/main/resources/buyingHistory.txt", true); // true parameter makes it write at the file's end
@@ -127,7 +137,7 @@ public class BuyerConfirmationScreen extends BorderPane {
             System.out.println("CRITICAL ERROR IN CREATING THE FILE WRITER!!!");
         }
     }
-
+    // writes the bottom dashes to the file for separation purposes and writes it to a text file 
     private void writeBottomDashes() {
         try {
             FileOutputStream outS = new FileOutputStream("src/main/resources/buyingHistory.txt", true); // true parameter makes it write at the file's end
