@@ -8,3 +8,55 @@ Title: Words in Motion | Price: 60.00 | Category: Language
 Title: Breaking Down Grammar | Price: 41.00 | Category: Language
 Title: A World of Words | Price: 21.00 | Category: Language
 ----------------------------------------------------------------------------------
+BUYER
+Title: Echoes of the Past | Price: 43.00 | Category: English
+Title: The Last Letter | Price: 26.00 | Category: English
+Title: A Symphony of Words | Price: 52.00 | Category: English
+----------------------------------------------------------------------------------
+BUYER
+Title: The Geometry of Nature | Price: 35.00 | Category: Math
+Title: The Physics of Natural Disasters | Price: 28.00 | Category: Math
+Title: The Art of Proof | Price: 43.00 | Category: Math
+Title: The Calculus of Variations | Price: 65.00 | Category: Math
+----------------------------------------------------------------------------------
+BUYER
+Title: The Geometry of Nature | Price: 35.00 | Category: Math
+Title: The Physics of Natural Disasters | Price: 28.00 | Category: Math
+Title: The Art of Proof | Price: 43.00 | Category: Math
+Title: The Calculus of Variations | Price: 65.00 | Category: Math
+----------------------------------------------------------------------------------
+BUYER
+Title: The Art of Coding | Price: 60.00 | Category: Computer
+Title: The Secret Life of Databases | Price: 70.00 | Category: Computer
+----------------------------------------------------------------------------------
+BUYER
+Title: Echoes of the Past | Price: 43.00 | Category: English
+----------------------------------------------------------------------------------
+BUYER
+Title: The Physics of Natural Disasters | Price: 45.00 | Category: Natural Science
+----------------------------------------------------------------------------------
+BUYER
+Title: The Geometry of Nature | Price: 35.00 | Category: Math
+Title: The Calculus of Variations | Price: 65.00 | Category: Math
+----------------------------------------------------------------------------------
+BUYER
+Title: The Physics of Natural Disasters | Price: 28.00 | Category: Math
+----------------------------------------------------------------------------------
+BUYER
+Title: Mastering C++ | Price: 55.00 | Category: Computer
+----------------------------------------------------------------------------------
+BUYER
+Title: Understanding Operating Systems | Price: 75.00 | Category: Computer
+----------------------------------------------------------------------------------
+BUYER
+Title: The Geometry of Nature | Price: 35.00 | Category: Math
+Title: The Physics of Natural Disasters | Price: 28.00 | Category: Math
+Title: The Art of Proof | Price: 43.00 | Category: Math
+Title: The Calculus of Variations | Price: 65.00 | Category: Math
+----------------------------------------------------------------------------------
+BUYER
+Title: The Art of Coding | Price: 60.00 | Category: Computer
+Title: The Secret Life of Databases | Price: 70.00 | Category: Computer
+Title: Mastering C++ | Price: 55.00 | Category: Computer
+Title: Understanding Operating Systems | Price: 75.00 | Category: Computer
+----------------------------------------------------------------------------------

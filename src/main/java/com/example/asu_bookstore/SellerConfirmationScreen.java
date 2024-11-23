@@ -1,4 +1,5 @@
 package com.example.asu_bookstore;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,7 +40,7 @@ public class SellerConfirmationScreen extends BorderPane {
 
         //labels for front-end portion of the code.
         Label thankYou = new Label("Thank you for selling your book to the ASU Bookstore!");
-        Label purchaseTotal = new Label("Here are your sale details:");
+        Label sellTotal = new Label("Here are your sale details:");
 
         soldBook = new Label();
 
@@ -52,16 +53,19 @@ public class SellerConfirmationScreen extends BorderPane {
             control.switchScreen("");
         });
 
+
         //this VBox sets all the labels, buttons, image, and pricing.
         VBox allNodes = new VBox(20);
-        allNodes.getChildren().addAll(thankYou, purchaseTotal, soldBook, displaySun, totalPriceLabel);
 
         //styling for labels for font size and color.
         thankYou.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-underline: true;");
-        purchaseTotal.setStyle("-fx-text-fill: white;");
+        sellTotal.setStyle("-fx-text-fill: white;");
         allNodes.setStyle("-fx-font-size: 15px;");
         soldBook.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-underline: true;");
         backToHome.setStyle("-fx-background-color:#e9cdd6;");
+        allNodes.setStyle("-fx-font-size: 15px;");
+        allNodes.getChildren().addAll(thankYou, sellTotal, soldBook, displaySun, backToHome, totalPriceLabel);
+
         allNodes.setAlignment(Pos.CENTER);
 
         //centers every item in the VBox towards the center.
