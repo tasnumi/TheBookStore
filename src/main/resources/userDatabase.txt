@@ -4,3 +4,5 @@ resffs dsfes seller
 buyer buyer buyer
 b b buyer
 s s seller
+1 1 buyer
+2 2 seller
