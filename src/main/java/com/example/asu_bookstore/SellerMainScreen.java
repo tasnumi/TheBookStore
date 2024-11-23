@@ -13,78 +13,138 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Objects;
+
+// This com.example.asu_bookstore.SellerMainScreen class will eventually host the seller's screen in the program.
 public class SellerMainScreen extends BorderPane {
-    private BookDatabase bookDatabase;
+    ScrollPane r = new ScrollPane();
 
     public SellerMainScreen(final int WIDTH, final int HEIGHT, ASU_Bookstore control) {
-        bookDatabase = new BookDatabase();
+        ASU_Bookstore bookstore = new ASU_Bookstore();
+        BuyerMainScreen buyer = new BuyerMainScreen(WIDTH, HEIGHT, bookstore);
+        ArrayList<String> bookDatabase = buyer.getBookData();
 
-        Rectangle background = new Rectangle(WIDTH, WIDTH);
-        background.setFill(Color.web("#E4CDE8"));
-        this.getChildren().add(background);
+        VBox vbox = new VBox();
 
-        HBox mainLayout = new HBox();
-        mainLayout.setSpacing(15);
-        mainLayout.setPadding(new Insets(15));
-        mainLayout.setAlignment(Pos.CENTER);
+        for (String book : bookDatabase) {
+            Label bookLabel = new Label(book);
+            vbox.getChildren().add(bookLabel);
+        }
+        r.setContent(vbox);
 
-        VBox leftPanel = new VBox(20);
-        leftPanel.setStyle("-fx-background-color: #be96c4; -fx-border-color: #8273da; -fx-border-width: 0.5; -fx-padding: 20");
-        leftPanel.setMinWidth(WIDTH / 3.0);
-        leftPanel.setAlignment(Pos.CENTER);
+        Rectangle lightPurpBackground = new Rectangle(WIDTH, WIDTH); // apricot background
+        lightPurpBackground.setFill(Color.web("#E4CDE8"));
+        this.getChildren().add(lightPurpBackground);
 
-        TextField titleField = new TextField();
-        titleField.setPromptText("Book Title");
+        // This HBox contains everything that will be placed inside the main seller screen
+        HBox entireContainer = new HBox();
+        entireContainer.setSpacing(15);
+        entireContainer.setPadding(new Insets(15, 15, 0, 15));
+        entireContainer.setAlignment(Pos.CENTER);
 
-        TextField priceField = new TextField();
-        priceField.setPromptText("Price");
+        // This VBox contains everything on the left (condition + genre)
+        VBox leftContainer = new VBox(20);
+        leftContainer.setStyle("-fx-background-color: #be96c4; -fx-border-color: #8273da; -fx-border-width: 0.5; -fx-padding: 20");
+        leftContainer.setMinWidth((WIDTH / 2.5) - 30);
+        leftContainer.setMaxHeight(HEIGHT - 60);
+        leftContainer.setPadding(new Insets(0, 15, 0, 0));
 
-        ComboBox<String> genreComboBox = new ComboBox<>();
-        genreComboBox.getItems().addAll("Natural Science", "Computer", "Math", "English", "Language", "Others");
-        genreComboBox.setPromptText("Genre");
+        // Add book condition and genre options
+        Label label1 = new Label("Please select the condition of the book for sale:");
+        label1.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
 
-        ToggleGroup conditionGroup = new ToggleGroup();
-        RadioButton used = new RadioButton("Used");
-        used.setToggleGroup(conditionGroup);
-        RadioButton likeNew = new RadioButton("Like New");
-        likeNew.setToggleGroup(conditionGroup);
-        RadioButton moderatelyUsed = new RadioButton("Moderately Used");
-        moderatelyUsed.setToggleGroup(conditionGroup);
-        RadioButton heavilyUsed = new RadioButton("Heavily Used");
-        heavilyUsed.setToggleGroup(conditionGroup);
+        ToggleGroup t = new ToggleGroup();
+        RadioButton checkbox1 = new RadioButton("Used");
+        checkbox1.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox1.setToggleGroup(t);
 
-        leftPanel.getChildren().addAll(new Label("Add a Book for Sale:"), titleField, priceField, genreComboBox, used, likeNew, moderatelyUsed, heavilyUsed);
+        RadioButton checkbox2 = new RadioButton("Like New");
+        checkbox2.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox2.setToggleGroup(t);
 
-        Button sellButton = new Button("Sell");
-        sellButton.setOnAction(e -> handleSell(titleField, priceField, genreComboBox, conditionGroup));
+        RadioButton checkbox3 = new RadioButton("Moderately Used");
+        checkbox3.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox3.setToggleGroup(t);
 
-        Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(e -> control.switchScreen("Login"));
+        RadioButton checkbox4 = new RadioButton("Heavily Used");
+        checkbox4.setStyle(" -fx-text-fill: #FFFFFF");
+        checkbox4.setToggleGroup(t);
 
-        HBox actionButtons = new HBox(10, logoutButton, sellButton);
-        actionButtons.setAlignment(Pos.CENTER);
+        Label label2 = new Label("Please select a book genre");
+        label2.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
 
-        mainLayout.getChildren().add(leftPanel);
-        this.setCenter(mainLayout);
-        this.setBottom(actionButtons);
+        ComboBox<String> combobox = new ComboBox<>();
+        combobox.getItems().addAll("Natural Science", "Computer", "Math", "English", "Language", "Others");
+
+        Label label3 = new Label("Please Enter the Original Book Price:");
+        label3.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+
+        TextField text = new TextField();
+
+        Label label4 = new Label("Please enter the book title");
+        label4.setStyle(" -fx-font: 9 Arial;-fx-font-weight: bold; -fx-text-fill: #FFFFFF; -fx-underline: true");
+        TextField title = new TextField();
+
+        leftContainer.getChildren().addAll(label1, checkbox1, checkbox2, checkbox3, checkbox4, label2, combobox, label3, text, label4, title);
+
+        Button listBook = new Button("List Book");
+
+        VBox rightContainer = new VBox(10);
+        rightContainer.setStyle("-fx-background-color: #be96c4; -fx-border-color: #8273da; -fx-border-width: 0.5; -fx-padding: 20");
+        rightContainer.setMinWidth((WIDTH / 2.5) - 30);
+        rightContainer.setMaxHeight(HEIGHT - 60);
+        rightContainer.setPadding(new Insets(0, 0, 0, 15));
+
+        // Handle listing books
+        listBook.setOnAction(e -> {
+            String confirmationDetails = getSellerConfirmationDetails(t, combobox, text, title);
+            if (confirmationDetails != null) {
+                // Show the Seller Confirmation Screen
+                SellerConfirmationScreen confirmationScreen = new SellerConfirmationScreen(confirmationDetails);
+                Stage confirmationStage = new Stage();
+                confirmationScreen.start(confirmationStage);
+
+                // Save the listing to a file
+                saveListingToFile(confirmationDetails);
+            }
+        });
+
+        rightContainer.getChildren().addAll(listBook, r);
+        entireContainer.getChildren().addAll(leftContainer, rightContainer);
+        this.setCenter(entireContainer);
     }
 
-    private void handleSell(TextField titleField, TextField priceField, ComboBox<String> genreComboBox, ToggleGroup conditionGroup) {
-        String title = titleField.getText();
-        String price = priceField.getText();
-        String genre = genreComboBox.getValue();
-        RadioButton selectedCondition = (RadioButton) conditionGroup.getSelectedToggle();
+    private String getSellerConfirmationDetails(ToggleGroup t, ComboBox<String> combobox, TextField text, TextField title) {
+        try {
+            RadioButton selectedCondition = (RadioButton) t.getSelectedToggle();
+            String condition = selectedCondition.getText();
+            String genre = combobox.getValue();
+            String price = text.getText();
+            String bookTitle = title.getText();
 
-        if (title.isEmpty() || price.isEmpty() || genre == null || selectedCondition == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "All fields must be filled out!");
+            if (condition == null || genre == null || genre.isEmpty() || price.isEmpty() || bookTitle.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please complete all fields before listing the book.");
+                alert.showAndWait();
+                return null;
+            }
+
+            return String.format("Title: %s\nCondition: %s\nGenre: %s\nPrice: $%s", bookTitle, condition, genre, price);
+        } catch (Exception ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred: " + ex.getMessage());
             alert.showAndWait();
-            return;
+            return null;
         }
+    }
 
-        String bookDetails = String.format("Title: %s | Price: %s | Genre: %s | Condition: %s", title, price, genre, selectedCondition.getText());
-        ConfirmationScreen confirmationScreen = new ConfirmationScreen(bookDetails, false);
-        confirmationScreen.start(new Stage());
+    private void saveListingToFile(String listingDetails) {
+        try (FileWriter writer = new FileWriter("listings.txt", true)) {
+            writer.write(listingDetails + "\n");
+        } catch (IOException e) {
+            System.out.println("Error saving listing: " + e.getMessage());
+        }
     }
 }
-
-
