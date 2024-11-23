@@ -4,17 +4,16 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SellerConfirmationScreen extends Application {
+public class SellerConfirmationScreen extends BorderPane {
     private String confirmationDetails;
 
-    public SellerConfirmationScreen(String confirmationDetails) {
-        this.confirmationDetails = confirmationDetails;
+    public SellerConfirmationScreen(int width, int height, SellerMainScreen seller, ASU_Bookstore asuBookstore) {
     }
 
-    @Override
     public void start(Stage primaryStage) {
         VBox layout = new VBox(15);
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;");

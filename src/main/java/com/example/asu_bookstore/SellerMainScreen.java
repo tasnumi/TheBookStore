@@ -109,13 +109,9 @@ public class SellerMainScreen extends BorderPane {
         title.setPrefWidth(15);
         title.setPrefHeight(15);
 
-
-
         //calculation for the price of the books to be sold
         //double price=0.00;
         VBox printData = new VBox(10);
-
-
 
         leftContainer.getChildren().addAll(label1, checkbox1, checkbox2, checkbox3, checkbox4, label2, combobox, label3, text,label4, title);
 
@@ -179,6 +175,10 @@ public class SellerMainScreen extends BorderPane {
 
             // switch the screen
             control.switchScreen("");
+        });
+
+        purchase.setOnAction(e -> {
+
         });
 
         // The behavior for these buttons can be defined here, which might be easier that creating

@@ -23,6 +23,8 @@ import java.util.Arrays;
 public class BuyerMainScreen extends BorderPane{
     private ArrayList<String> addBooksToFile = new ArrayList<String>();
     VBox filteredItems = new VBox(15);
+    ArrayList<String> selectedBooks;
+    ArrayList<String> filteredBooks;
 
     public BuyerMainScreen(final int WIDTH, final int HEIGHT, ASU_Bookstore control) {
         Rectangle turquoiseBackground = new Rectangle(WIDTH, WIDTH); // apricot background
@@ -30,8 +32,9 @@ public class BuyerMainScreen extends BorderPane{
         this.getChildren().add(turquoiseBackground);
 
         getDataFromTextDB();
+        selectedBooks = new ArrayList<String>();
 
-        // This HBox contains everything that will be placed inside the main buyer screen
+                // This HBox contains everything that will be placed inside the main buyer screen
         HBox entireContainer = new HBox();
         entireContainer.setSpacing(15);
         entireContainer.setPadding(new Insets(15, 15, 0, 15));
@@ -117,6 +120,29 @@ public class BuyerMainScreen extends BorderPane{
         });
 
         Button purchase = new Button("Purchase");
+        purchase.setOnAction(e -> {
+            boolean canPurchase = false;
+
+
+            for (int i = 0; i < filteredItems.getChildren().size(); i++) {
+                if(filteredItems.getChildren().get(i) instanceof CheckBox) {
+                    if (((CheckBox) filteredItems.getChildren().get(i)).isSelected()) {
+                        selectedBooks.add(((Label) filteredItems.getChildren().get(i - 1)).getText());
+                        control.getBuyerMainConfirmationScreen().constructPurchaseInfo(this);
+                    }
+                }
+            }
+
+            if (!selectedBooks.isEmpty()) {
+                used.setSelected(false);
+                likeNew.setSelected(false);
+                moderatelyUsed.setSelected(false);
+                heavilyUsed.setSelected(false);
+                comboBox.getSelectionModel().clearSelection();
+
+                control.switchScreen("buyerConfirm");
+            }
+        });
         // The behavior for these buttons can be defined here, which might be easier that creating
         // a separate ButtonHandler<ActionEvent>() class so that the button behavior code can use the
         // constructor parameters that are accessible here. See the LoginScreen buttons for an example.
@@ -131,7 +157,8 @@ public class BuyerMainScreen extends BorderPane{
 
     public void handleSelection(CheckBox used, CheckBox likeNew, CheckBox moderatelyUsed, CheckBox heavilyUsed, ComboBox<String> genres, VBox filteredItems) {
         filteredItems.getChildren().clear();
-        ArrayList<String> filteredBooks = new ArrayList<>();
+        selectedBooks.clear();
+        filteredBooks = new ArrayList<String>();
         String selectedGenre = (String) genres.getValue();
 
         if(selectedGenre == null || selectedGenre.isEmpty()) {
@@ -162,6 +189,7 @@ public class BuyerMainScreen extends BorderPane{
         for(int i = 0; i < filteredBooks.size(); i++) {
             String book = filteredBooks.get(i);
             String title = book.split("Title: ")[1].split(" \\| ")[0];
+            //selectedBooks.add(title);
             filteredItems.getChildren().add(new Label(title));
             filteredItems.getChildren().add(new CheckBox());
         }
